@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:src="@drawable/bitcoinlogo"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:id="@+id/cryptoname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="110dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Bitcoin"
+        android:textColor="#000"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/initials"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="45dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="BTC"
+        android:textColor="#8B8C89"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="280dp"
+        android:layout_marginTop="45dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="-2.58652"
+        android:textSize="15dp" />
+    <TextView
+        android:id="@+id/cryptocurrency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="270dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="$"
+        android:textColor="#069E2D"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/cryptoprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="285dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="63672"
+        android:textColor="#069E2D"
+        android:textSize="20dp" />
+
+</RelativeLayout>
