@@ -9,8 +9,4 @@ interface ApiInterface {
     fun getCrypto(): Call<List<CryptoData>>
 
 
-    @GET("reference/news")
-    @Headers("Authorization: Bearer ilQSt9FKzshy2TT8ft25pwWqNhggcfmD")
-    fun getNews(): Call<List<NewsData>>
-
 }

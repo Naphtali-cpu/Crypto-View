@@ -8,29 +8,34 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.newslist.view.*
 
-class NewsAdapter(val context: Context, val userList: List<NewsData>) : RecyclerView.Adapter<NewsAdapter.CryptoHolderNews>(){
+class NewsAdapter(val homeFeed: HomeFeed): RecyclerView.Adapter<CustomViewHolder>() {
 
-    class CryptoHolderNews(view : View) : RecyclerView.ViewHolder(view){
-        fun bindMovie(movie: NewsData){
-            itemView.newstitle.text = movie.title
-            itemView.date.text = movie.published_utc
-            Picasso.with(itemView.context).load(movie.image_url).into(itemView.newsimage)
+    val videoTitles = listOf("First title", "Second", "3rd", "MOOOOORE TITLE")
 
-        }
-    }
-
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CryptoHolderNews {
-        return CryptoHolderNews(
-            LayoutInflater.from(parent.context).inflate(R.layout.newslist, parent, false)
-        )
-    }
-
+    // numberOfItems
     override fun getItemCount(): Int {
-        return userList.size
+        return homeFeed.results.count()
     }
 
-    override fun onBindViewHolder(holder: CryptoHolderNews, position: Int) {
-        holder.bindMovie(userList.get(position))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
+        // how do we even create a view
+        val layoutInflater = LayoutInflater.from(parent?.context)
+        val cellForRow = layoutInflater.inflate(R.layout.newslist, parent, false)
+        return CustomViewHolder(cellForRow)
     }
+
+    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
+        val video = homeFeed.results.get(position)
+        val image = holder.view.newsimage
+        Picasso.with(holder.view.context).load(video.image_url).into(image)
+        val results = homeFeed.results.get(position)
+        holder.view.newstitle?.text = results.title
+        val publish = homeFeed.results.get(position)
+        holder.view.date?.text = publish.published_utc
+    }
+
+}
+
+class CustomViewHolder(val view: View): RecyclerView.ViewHolder(view) {
+
 }

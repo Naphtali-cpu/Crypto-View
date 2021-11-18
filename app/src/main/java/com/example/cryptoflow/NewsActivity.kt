@@ -1,71 +1,103 @@
 package com.example.cryptoflow
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_list.progressBar
 import kotlinx.android.synthetic.main.activity_news.*
 import okhttp3.OkHttpClient
+import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
 
 const val BASE_URL2 = "https://api.polygon.io/v2/"
 
 
 class NewsActivity : AppCompatActivity() {
-    lateinit var myAdapter: NewsAdapter
-    lateinit var linearLayoutManager: LinearLayoutManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
 
-        recyclerviewnews.setHasFixedSize(true)
-        linearLayoutManager = LinearLayoutManager(this)
-        recyclerviewnews.layoutManager = linearLayoutManager
-        getMyData()
-    }
+        recyclerviewnews.layoutManager = LinearLayoutManager(this)
+        fetchJson()
 
-    private fun getMyData() {
-        val okhttpHttpLoggingInterceptor = HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        }
-
-        val okHttpClient = OkHttpClient.Builder().addInterceptor(
-            okhttpHttpLoggingInterceptor
-        )
-
-        val retrofitBuilder = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BASE_URL2)
-            .client(okHttpClient.build())
-            .build()
-            .create(ApiInterface::class.java)
-
-        val retrofitData = retrofitBuilder.getNews().enqueue(object :
-            Callback<List<NewsData>> {
-            override fun onResponse(call: Call<List<NewsData>>, response: Response<List<NewsData>>) {
-//                hideProgressBar()
-                if(response?.body() != null) {
-                    myAdapter = NewsAdapter(baseContext, response.body()!!)
-                    recyclerviewnews.adapter = myAdapter
-                    myAdapter.notifyDataSetChanged()
-
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigationView.selectedItemId = R.id.nav_news
+        bottomNavigationView.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_home -> {
+                    startActivity(Intent(applicationContext, ListActivity::class.java))
+                    overridePendingTransition(0, 0)
+                    return@OnNavigationItemSelectedListener true
                 }
-            }
+                R.id.nav_news -> return@OnNavigationItemSelectedListener true
+                R.id.nav_settings -> {
+                    startActivity(Intent(applicationContext, SettingsActivity::class.java))
+                    overridePendingTransition(0, 0)
+                    return@OnNavigationItemSelectedListener true
+                }
 
-            override fun onFailure(call: Call<List<NewsData>>, t: Throwable) {
-//                hideProgressBar()
-                Log.d("NewsActivity", "onFailure:" + t.message)
             }
+            false
         })
     }
-//    private fun hideProgressBar() {
-//        progressBar.setVisibility(View.GONE)
-//    }
+
+    private fun fetchJson() {
+        println("Attempting to fetch JSON")
+
+        val url = "https://api.polygon.io/v2/reference/news?apiKey=ilQSt9FKzshy2TT8ft25pwWqNhggcfmD"
+
+        val request = Request.Builder().url(url).build()
+        val client = OkHttpClient()
+        client.newCall(request).enqueue(object: okhttp3.Callback {
+            override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
+                val body = response.body?.string()
+                println(body)
+
+                val gson = GsonBuilder().create()
+                val homeFeed = gson.fromJson(body, HomeFeed::class.java)
+
+                runOnUiThread {
+                    recyclerviewnews.adapter = NewsAdapter(homeFeed)
+                }
+
+            }
+
+            override fun onFailure(call: okhttp3.Call, e: IOException) {
+                println("Failed to execute request")
+            }
+
+        })
+
+    }
+
+
+
 }
+
+class HomeFeed(val results: List<Results>)
+
+class Results(
+    val amp_url: String,
+    val article_url: String,
+    val author: String,
+    val description: String,
+    val id: String,
+    val image_url: String,
+    val keywords: List<String>,
+    val published_utc: String,
+    val tickers: List<String>,
+    val title: String
+
+)

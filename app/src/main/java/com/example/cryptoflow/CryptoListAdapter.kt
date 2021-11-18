@@ -33,9 +33,15 @@ class CryptoListAdapter(val context: Context, val userList: List<CryptoData>) : 
             else
                 Color.parseColor("#32CD32")
             )
+
+//            itemView.cryptoname.setOnClickListener { v ->
+//                val context = v.context
+//                val intent = Intent(context, UpdateProduct::class.java)
+//                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                context.startActivity(intent)
+//            }
         }
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CryptoViewHolder {
         return CryptoViewHolder(

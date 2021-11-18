@@ -7,17 +7,11 @@
     android:layout_height="match_parent"
     android:background="#F8F9FA"
     tools:context=".NewsActivity">
-<!--    <ProgressBar-->
-<!--        android:id="@+id/newsProgressBar"-->
-<!--        style="?android:attr/progressBarStyle"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_centerVertical="true" />-->
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,22 +22,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="120dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="40dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Crypto News"
                 android:textColor="#000"
                 android:textSize="25dp" />
 
-            <!--    <com.google.android.material.textfield.TextInputEditText-->
-            <!--        android:layout_width="350dp"-->
-            <!--        android:layout_height="wrap_content"-->
-            <!--        android:layout_marginLeft="30dp"-->
-            <!--        android:layout_marginTop="80dp"-->
-            <!--        android:background="@drawable/search"-->
-            <!--        android:fontFamily="@font/poppins_medium"-->
-            <!--        android:text="   Search"-->
-            <!--        android:textColor="#8B8C89"-->
-            <!--        android:textSize="23dp" />-->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerviewnews"

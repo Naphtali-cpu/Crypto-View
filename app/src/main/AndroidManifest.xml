@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CryptoFlow">
         <activity
+            android:name=".AppInfo"
+            android:exported="true" />
+        <activity
             android:name=".SettingsActivity"
             android:exported="true" />
         <activity
