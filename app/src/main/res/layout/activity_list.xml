@@ -59,7 +59,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="80dp"
                     android:fontFamily="@font/poppins_semibold"
-                    android:text="$ 293847652.0987"
+                    android:text="$ 293,847,652.0987"
                     android:textSize="30dp"
                     android:textColor="#FFF" />
             </androidx.cardview.widget.CardView>

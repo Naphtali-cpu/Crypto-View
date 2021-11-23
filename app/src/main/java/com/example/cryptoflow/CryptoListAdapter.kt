@@ -7,11 +7,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.cryptolist.view.*
 import retrofit2.Call
@@ -33,7 +30,6 @@ class CryptoListAdapter(val context: Context, val userList: List<CryptoData>) : 
             else
                 Color.parseColor("#32CD32")
             )
-
         }
     }
 
@@ -49,5 +45,28 @@ class CryptoListAdapter(val context: Context, val userList: List<CryptoData>) : 
 
     override fun onBindViewHolder(holder: CryptoViewHolder, position: Int) {
         holder.bindMovie(userList.get(position))
+        holder.itemView.cryptoname.setOnClickListener {
+            val nextdetail = ServiceBuilder.buildService(ApiInterface::class.java)
+            val requestCall = nextdetail.getCurrentData(userList[position].id)
+
+            requestCall.enqueue(object: Callback<Unit> {
+                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                    if (response.isSuccessful) {
+                        val intent = Intent(context, CryptoDetail::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        context.startActivity(intent)
+
+                    } else {
+//                        Toast.makeText(this@MyAdapter, "Failed to Delete", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<Unit>, t: Throwable) {
+                    Log.d("CryptoListAdapter", "onFailure:" + t.message)
+
+                }
+
+            })
+        }
     }
 }
