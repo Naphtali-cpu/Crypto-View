@@ -6,26 +6,31 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:src="@drawable/bitcoinlogo"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginLeft="20dp" />
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/bitcoinlogo" />
 
     <TextView
         android:id="@+id/cryptoname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="110dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/poppins_medium"
         android:text="Bitcoin"
         android:textColor="#000"
-        android:textSize="20dp" />
+        android:textSize="17dp" />
 
     <TextView
         android:id="@+id/initials"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="110dp"
+        android:layout_marginLeft="70dp"
         android:layout_marginTop="45dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="BTC"
@@ -36,29 +41,36 @@
         android:id="@+id/percent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/cryptoprice"
         android:layout_marginLeft="280dp"
         android:layout_marginTop="45dp"
+        android:layout_marginEnd="0dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="-2.58652"
         android:textSize="15dp" />
+
     <TextView
         android:id="@+id/cryptocurrency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="270dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="305dp"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/poppins_medium"
         android:text="$"
         android:textColor="#069E2D"
-        android:textSize="20dp" />
+        android:textSize="17dp" />
 
     <TextView
         android:id="@+id/cryptoprice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="285dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="320dp"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/poppins_medium"
         android:text="63672"
         android:textColor="#069E2D"
-        android:textSize="20dp" />
+        android:textSize="17dp" />
 
 </RelativeLayout>

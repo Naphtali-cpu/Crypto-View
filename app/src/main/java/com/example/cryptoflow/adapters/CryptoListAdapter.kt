@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoflow.R
 import com.example.cryptoflow.api.ApiInterface
@@ -19,19 +21,18 @@ import retrofit2.Response
 
 class CryptoListAdapter(val context: Context, val userList: List<CryptoData>) : RecyclerView.Adapter<CryptoListAdapter.CryptoViewHolder>(){
 
-    class CryptoViewHolder(view : View) : RecyclerView.ViewHolder(view){
-        fun bindMovie(movie : CryptoData){
-            itemView.cryptoname.text = movie.name
-            itemView.initials.text = movie.symbol
-            itemView.cryptoprice.text = movie.current_price
-            itemView.percent.text = movie.price_change_percentage_24h + "%"
-            Picasso.with(itemView.context).load(movie.image).into(itemView.logo)
-
-            itemView.percent.setTextColor(if (movie.price_change_percentage_24h!!.contains("-"))
-                Color.parseColor("#FF0000")
-            else
-                Color.parseColor("#32CD32")
-            )
+    inner class CryptoViewHolder(view : View) : RecyclerView.ViewHolder(view){
+        var cryptoName: TextView
+        var initials: TextView
+        var cryptoPrice: TextView
+        var cryptoImage: ImageView
+        var pricePerc: TextView
+        init {
+            cryptoName = view.cryptoname
+            initials = view.initials
+            cryptoPrice = view.cryptoprice
+            cryptoImage = view.logo
+            pricePerc = view.percent
         }
     }
 
@@ -46,29 +47,10 @@ class CryptoListAdapter(val context: Context, val userList: List<CryptoData>) : 
     }
 
     override fun onBindViewHolder(holder: CryptoViewHolder, position: Int) {
-        holder.bindMovie(userList.get(position))
-        holder.itemView.cryptoname.setOnClickListener {
-            val nextdetail = ServiceBuilder.buildService(ApiInterface::class.java)
-            val requestCall = nextdetail.getCurrentData(userList[position].id)
-
-            requestCall.enqueue(object: Callback<Unit> {
-                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
-                    if (response.isSuccessful) {
-//                        val intent = Intent(context, CryptoDetail::class.java)
-//                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//                        context.startActivity(intent)
-
-                    } else {
-//                        Toast.makeText(this@MyAdapter, "Failed to Delete", Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<Unit>, t: Throwable) {
-                    Log.d("CryptoListAdapter", "onFailure:" + t.message)
-
-                }
-
-            })
-        }
+        holder.cryptoName.text = userList[position].name
+        holder.initials.text = userList[position].symbol
+        holder.cryptoPrice.text = userList[position].current_price
+        val imageLink = holder.cryptoImage.logo
+        Picasso.with(holder.cryptoImage.context).load(userList[position].image).into(imageLink)
     }
 }
