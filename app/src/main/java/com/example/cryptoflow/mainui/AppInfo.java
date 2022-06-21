@@ -1,14 +1,16 @@
-package com.example.cryptoflow;
+package com.example.cryptoflow.mainui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class CryptoDetail extends AppCompatActivity {
+import com.example.cryptoflow.R;
+
+public class AppInfo extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crypto_detail);
+        setContentView(R.layout.activity_app_info);
     }
 }

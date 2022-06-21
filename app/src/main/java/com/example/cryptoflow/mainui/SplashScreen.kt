@@ -1,10 +1,12 @@
-package com.example.cryptoflow
+package com.example.cryptoflow.mainui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
+import com.example.cryptoflow.R
+import com.example.cryptoflow.auth.SignIn
 
 class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +19,7 @@ class SplashScreen : AppCompatActivity() {
 
 
         Handler().postDelayed({
-            val intent = Intent(this, ListActivity::class.java)
+            val intent = Intent(this, SignIn::class.java)
             startActivity(intent)
             finish()
         }, 3000)

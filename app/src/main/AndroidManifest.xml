@@ -12,22 +12,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CryptoFlow">
         <activity
-            android:name=".CryptoDetail"
+            android:name=".auth.SignIn"
+            android:exported="false" />
+        <activity
+            android:name=".auth.SignUp"
+            android:exported="false" />
+        <activity
+            android:name=".mainui.AppInfo"
             android:exported="true" />
         <activity
-            android:name=".AppInfo"
+            android:name=".mainui.SettingsActivity"
             android:exported="true" />
         <activity
-            android:name=".SettingsActivity"
+            android:name=".mainui.NewsActivity"
             android:exported="true" />
         <activity
-            android:name=".NewsActivity"
+            android:name=".mainui.ListActivity"
             android:exported="true" />
         <activity
-            android:name=".ListActivity"
-            android:exported="true" />
-        <activity
-            android:name=".SplashScreen"
+            android:name=".mainui.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

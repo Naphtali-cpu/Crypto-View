@@ -1,23 +1,16 @@
-package com.example.cryptoflow
+package com.example.cryptoflow.mainui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cryptoflow.R
+import com.example.cryptoflow.adapters.NewsAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.GsonBuilder
-import kotlinx.android.synthetic.main.activity_list.progressBar
 import kotlinx.android.synthetic.main.activity_news.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
 const val BASE_URL2 = "https://api.polygon.io/v2/"

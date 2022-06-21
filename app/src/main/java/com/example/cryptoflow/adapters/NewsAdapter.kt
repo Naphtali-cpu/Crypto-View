@@ -1,10 +1,11 @@
-package com.example.cryptoflow
+package com.example.cryptoflow.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cryptoflow.R
+import com.example.cryptoflow.mainui.HomeFeed
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.newslist.view.*
 

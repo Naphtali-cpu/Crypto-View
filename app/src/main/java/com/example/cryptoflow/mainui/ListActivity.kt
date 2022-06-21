@@ -1,4 +1,4 @@
-package com.example.cryptoflow
+package com.example.cryptoflow.mainui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,7 +6,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cryptoflow.R
+import com.example.cryptoflow.adapters.CryptoListAdapter
+import com.example.cryptoflow.api.ApiInterface
+import com.example.cryptoflow.mainui.data.CryptoData
+import com.example.cryptoflow.sessions.LoginPref
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_list.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -19,12 +26,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 const val BASE_URL = "https://api.coingecko.com/api/v3/"
 
 class ListActivity : AppCompatActivity() {
+    private lateinit var database: DatabaseReference
+    lateinit var session: LoginPref
     lateinit var myAdapter: CryptoListAdapter
     lateinit var linearLayoutManager: LinearLayoutManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
-
 
         recyclerviewlist.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
@@ -49,6 +57,19 @@ class ListActivity : AppCompatActivity() {
 
             }
             false
+        })
+
+        database = FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance().currentUser!!.uid).child("usernamesignup")
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val value = snapshot.value.toString()
+                userhomename.text = value
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
         })
     }
 

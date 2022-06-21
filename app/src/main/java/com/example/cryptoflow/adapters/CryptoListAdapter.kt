@@ -1,14 +1,16 @@
-package com.example.cryptoflow
+package com.example.cryptoflow.adapters
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cryptoflow.R
+import com.example.cryptoflow.api.ApiInterface
+import com.example.cryptoflow.api.ServiceBuilder
+import com.example.cryptoflow.mainui.data.CryptoData
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.cryptolist.view.*
 import retrofit2.Call
@@ -52,9 +54,9 @@ class CryptoListAdapter(val context: Context, val userList: List<CryptoData>) : 
             requestCall.enqueue(object: Callback<Unit> {
                 override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                     if (response.isSuccessful) {
-                        val intent = Intent(context, CryptoDetail::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        context.startActivity(intent)
+//                        val intent = Intent(context, CryptoDetail::class.java)
+//                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                        context.startActivity(intent)
 
                     } else {
 //                        Toast.makeText(this@MyAdapter, "Failed to Delete", Toast.LENGTH_SHORT).show()

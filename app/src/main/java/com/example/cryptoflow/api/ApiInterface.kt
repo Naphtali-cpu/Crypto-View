@@ -1,5 +1,6 @@
-package com.example.cryptoflow
+package com.example.cryptoflow.api
 
+import com.example.cryptoflow.mainui.data.CryptoData
 import retrofit2.Call
 import retrofit2.http.*
 
