@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "501502133747",
+    "firebase_url": "https://crypto-view-484dd-default-rtdb.firebaseio.com",
+    "project_id": "crypto-view-484dd",
+    "storage_bucket": "crypto-view-484dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:501502133747:android:f6e06256690e23de393e86",
+        "android_client_info": {
+          "package_name": "com.example.cryptoflow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "501502133747-gbcvvbmue0o7kui32pj69vofasojk079.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB88BE6pmJc0-IEJaMBhVdwC4JrUMHDpc4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "501502133747-gbcvvbmue0o7kui32pj69vofasojk079.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
