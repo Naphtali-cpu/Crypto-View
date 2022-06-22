@@ -1,4 +1,4 @@
-package com.example.cryptoflow.mainui.data
+package com.example.cryptoflow.data
 
 data class CryptoData(
     val id: String,

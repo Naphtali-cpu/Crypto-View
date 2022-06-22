@@ -58,4 +58,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage-ktx:20.0.0'
     implementation 'com.google.firebase:firebase-database-ktx'
     implementation platform('com.google.firebase:firebase-bom:26.3.0')
+    implementation 'com.tuyenmonkey:mkloader:1.4.0'
 }

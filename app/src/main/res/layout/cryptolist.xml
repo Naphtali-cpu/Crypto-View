@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp">
@@ -19,12 +20,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="70dp"
-        android:layout_marginTop="5dp"
         android:fontFamily="@font/poppins_medium"
         android:text="Bitcoin"
         android:textColor="#000"
-        android:textSize="17dp" />
+        android:textSize="17dp"
+        tools:layout_editor_absoluteX="76dp"
+        tools:layout_editor_absoluteY="2dp" />
 
     <TextView
         android:id="@+id/initials"
@@ -73,4 +74,4 @@
         android:textColor="#069E2D"
         android:textSize="17dp" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

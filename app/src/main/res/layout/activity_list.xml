@@ -9,7 +9,20 @@
     tools:context=".mainui.ListActivity"
     tools:ignore="HardcodedText">
 
+    <com.tuyenmonkey.mkloader.MKLoader
+        android:id="@+id/newLoader"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="300dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/scrollView3"
+        app:mk_color="#0466C8"
+        app:mk_type="Worm" />
+
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -147,8 +160,6 @@
 
 
             </LinearLayout>
-
-
 
 
             <!--            <LinearLayout-->

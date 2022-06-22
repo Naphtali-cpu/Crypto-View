@@ -14,7 +14,7 @@
         <entry key="app/src/main/res/layout/cryptolist.xml" value="0.25" />
         <entry key="app/src/main/res/layout/newslist.xml" value="0.5" />
         <entry key="app/src/main/res/menu/item_menu.xml" value="0.33" />
-        <entry key="app/src/main/res/menu/tabs.xml" value="0.25" />
+        <entry key="app/src/main/res/menu/tabs.xml" value="0.1" />
       </map>
     </option>
   </component>

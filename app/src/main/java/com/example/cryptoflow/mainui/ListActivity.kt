@@ -9,13 +9,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptoflow.R
 import com.example.cryptoflow.adapters.CryptoListAdapter
 import com.example.cryptoflow.api.ApiInterface
-import com.example.cryptoflow.mainui.data.CryptoData
+import com.example.cryptoflow.data.CryptoData
 import com.example.cryptoflow.sessions.LoginPref
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_list.*
 import okhttp3.OkHttpClient
+import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
@@ -108,6 +109,6 @@ class ListActivity : AppCompatActivity() {
         })
     }
     private fun hideProgressBar() {
-        progressBar.setVisibility(View.GONE)
+        newLoader.setVisibility(View.GONE)
     }
 }
