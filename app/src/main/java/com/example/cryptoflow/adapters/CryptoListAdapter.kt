@@ -1,15 +1,18 @@
 package com.example.cryptoflow.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoflow.R
 import com.example.cryptoflow.data.CryptoData
 import com.example.cryptoflow.data.Tickers
+import com.example.cryptoflow.mainui.CoinDetails
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.cryptolist.view.*
 
@@ -21,12 +24,14 @@ class CryptoListAdapter(val context: Context, val userList: List<CryptoData>) : 
         var cryptoPrice: TextView
         var cryptoImage: ImageView
         var pricePercent: TextView
+        var listCoin: ConstraintLayout
         init {
             cryptoName = view.cryptoname
             initials = view.initials
             cryptoPrice = view.cryptoprice
             cryptoImage = view.logo
             pricePercent = view.percent
+            listCoin = view.coinList
         }
     }
 
@@ -47,5 +52,13 @@ class CryptoListAdapter(val context: Context, val userList: List<CryptoData>) : 
         holder.pricePercent.text = userList[position].price_change_percentage_24h
         val imageLink = holder.cryptoImage.logo
         Picasso.with(holder.cryptoImage.context).load(userList[position].image).into(imageLink)
+
+        holder.listCoin.setOnClickListener { v ->
+            val context = v.context
+            val intent = Intent(context, CoinDetails::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            intent.putExtra("name", userList[position].name)
+            context.startActivity(intent)
+        }
     }
 }

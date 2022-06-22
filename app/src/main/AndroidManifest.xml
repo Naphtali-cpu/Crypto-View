@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CryptoFlow">
         <activity
+            android:name=".CoinDetails"
+            android:exported="false" />
+        <activity
             android:name=".auth.SignIn"
             android:exported="false" />
         <activity
