@@ -36,6 +36,9 @@ class SignUp : AppCompatActivity() {
                 signupemail.error = "Email is Required!"
                 passwordsignup.error = "Password is Required!"
             } else {
+
+//                Authenticating user and saving their username to Firebase Database
+
                 mAuth.createUserWithEmailAndPassword(email, pass)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {

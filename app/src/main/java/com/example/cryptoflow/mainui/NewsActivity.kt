@@ -22,6 +22,8 @@ class NewsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
 
+//        Recyclerview declaration and setup
+
         recyclerviewnews.layoutManager = LinearLayoutManager(this)
         fetchJson()
 
@@ -46,6 +48,8 @@ class NewsActivity : AppCompatActivity() {
         })
     }
 
+//    Fetching nested news data from API
+
     private fun fetchJson() {
         println("Attempting to fetch JSON")
 
@@ -60,6 +64,8 @@ class NewsActivity : AppCompatActivity() {
 
                 val gson = GsonBuilder().create()
                 val homeFeed = gson.fromJson(body, HomeFeed::class.java)
+
+//                Display our data on the view through the adapter
 
                 runOnUiThread {
                     recyclerviewnews.adapter = NewsAdapter(homeFeed)
@@ -78,6 +84,8 @@ class NewsActivity : AppCompatActivity() {
 
 
 }
+
+//Dataclass declaration for the news data
 
 class HomeFeed(val results: List<Results>)
 

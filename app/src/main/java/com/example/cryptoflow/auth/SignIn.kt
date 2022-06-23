@@ -34,7 +34,11 @@ class SignIn : AppCompatActivity() {
                 signinemail.error = "Email is Required!"
                 signinpassword.error = "Password is Required"
             } else {
+//                Saving the users data to session
                 session.createLoginSession(email, password)
+
+//                Login user using email and password only
+
                 mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(applicationContext, "Logged In Successfully", Toast.LENGTH_SHORT)

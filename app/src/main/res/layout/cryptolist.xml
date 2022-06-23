@@ -22,7 +22,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="4dp"
         android:fontFamily="@font/poppins_medium"
         android:text="Bitcoin"
         android:textColor="#000"
@@ -40,8 +39,10 @@
         android:text="BTC"
         android:textColor="#8B8C89"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/cryptoname"
-        tools:layout_editor_absoluteY="31dp" />
+        app:layout_constraintEnd_toStartOf="@+id/percent"
+        app:layout_constraintHorizontal_bias="0.059"
+        app:layout_constraintStart_toEndOf="@+id/logo"
+        app:layout_constraintTop_toBottomOf="@+id/cryptoname" />
 
     <TextView
         android:id="@+id/percent"

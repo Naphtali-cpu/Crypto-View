@@ -40,6 +40,8 @@ class ListActivity : AppCompatActivity() {
         recyclerviewlist.layoutManager = linearLayoutManager
         getMyData()
 
+//        Bottom bar navigation implementation
+
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView.selectedItemId = R.id.nav_home
         bottomNavigationView.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
@@ -60,6 +62,8 @@ class ListActivity : AppCompatActivity() {
             false
         })
 
+//        Get user's username from firebase database
+
         database = FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance().currentUser!!.uid).child("usernamesignup")
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -73,6 +77,8 @@ class ListActivity : AppCompatActivity() {
 
         })
     }
+
+//    Retrofit implementation for fetching all coins in the market
 
     private fun getMyData() {
         val okhttpHttpLoggingInterceptor = HttpLoggingInterceptor().apply {
