@@ -100,10 +100,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginLeft="290dp"
+                android:layout_marginLeft="276dp"
                 android:layout_marginTop="-30dp"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="  3647589"
+                android:text="  300 Billion"
                 android:textColor="#282D3E"
                 android:textSize="15dp" />
 
@@ -136,10 +136,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginLeft="290dp"
+                android:layout_marginLeft="276dp"
                 android:layout_marginTop="-30dp"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="  3647589"
+                android:text="  300 Billion"
                 android:textColor="#282D3E"
                 android:textSize="15dp" />
 
