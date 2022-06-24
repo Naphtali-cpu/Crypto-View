@@ -25,7 +25,15 @@ class SignUp : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
+        signUpUser()
 
+        redirectsignin.setOnClickListener {
+            val intent = Intent(this, SignIn::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun signUpUser() {
         signupbutton.setOnClickListener {
             val username = usernamesignup.text.toString()
             val email = signupemail.text.toString()
@@ -47,11 +55,9 @@ class SignUp : AppCompatActivity() {
                                     databaseReference.child("users").child(FirebaseAuth.getInstance().currentUser!!.uid).child("usernamesignup").setValue(username)
                                     databaseReference.child("users").child(FirebaseAuth.getInstance().currentUser!!.uid).child("emailaddress").setValue(email)
                                 }
-
                                 override fun onCancelled(error: DatabaseError) {
                                     TODO("Not yet implemented")
                                 }
-
                             })
                             Toast.makeText(applicationContext, "User registered successfully", Toast.LENGTH_SHORT).show()
                             startActivity(Intent(applicationContext, SignIn::class.java))
@@ -60,11 +66,6 @@ class SignUp : AppCompatActivity() {
                         }
                     }
             }
-        }
-
-        redirectsignin.setOnClickListener {
-            val intent = Intent(this, SignIn::class.java)
-            startActivity(intent)
         }
     }
 }

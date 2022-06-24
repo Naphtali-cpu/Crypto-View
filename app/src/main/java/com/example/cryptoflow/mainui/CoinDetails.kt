@@ -30,35 +30,35 @@ class CoinDetails : AppCompatActivity() {
         textCoin.text = coinName
 
 //        Checking size of the marketcap values and replacing with trillion, billion etc
-        if (marketCap?.length!! >= 15) {
-//            Trillions
+
+        if (marketCap?.length!! >= 15 || marketCap?.length!! >= 14 || marketCap?.length!! >= 13) {
+//            Trillion
             markCap.text = "$ ${marketCap.slice(0..2)} Trillion"
-        } else if (marketCap?.length!! >= 12) {
-//            Billions
+        } else if (marketCap?.length!! >= 12 || marketCap?.length!! >= 11 || marketCap?.length!! >= 10) {
+//            Billion
             markCap.text = "$ ${marketCap.slice(0..2)} Billion"
-        } else if (marketCap?.length!! >= 9) {
-//            Millions
+        } else if (marketCap?.length!! >= 9 || marketCap?.length!! >= 8 || marketCap?.length!! >= 7) {
+//            Million
             markCap.text = "$ ${marketCap.slice(0..2)} Million"
         } else {
             Toast.makeText(applicationContext, "Something went wrong", Toast.LENGTH_LONG).show()
         }
 
 //        Chacking the size of volume value, replacing with trillion, billion etc
-        if (totalVolume?.length!! >= 15) {
-//            Trillions
+
+        if (totalVolume?.length!! >= 15 || totalVolume?.length!! >= 14 || totalVolume?.length!! >= 13) {
+//            Trillion
             totalVol.text = "$ ${totalVolume.slice(0..2)} Trillion"
-        } else if (totalVolume?.length!! >= 12) {
-//            Billions
+        } else if (totalVolume?.length!! >= 12 || totalVolume?.length!! >= 11 || totalVolume?.length!! >= 10) {
+//            Billion
             totalVol.text = "$ ${totalVolume.slice(0..2)} Billion"
-        } else if (totalVolume?.length!! >= 9) {
-//            Millions
+        } else if (totalVolume?.length!! >= 9 || totalVolume?.length!! >= 8 || totalVolume?.length!! >= 7) {
+//            Million
             totalVol.text = "$ ${totalVolume.slice(0..2)} Million"
         } else {
             Toast.makeText(applicationContext, "Something went wrong", Toast.LENGTH_LONG).show()
         }
 
-//        markCap.text = "$ $marketCap"
-//        totalVol.text = "$ $totalVolume"
         markRank.text = "# $popularity"
         currPrice.text = "$ $currentPrice"
         Picasso.with(this).load(coinLogo).into(imageCoin)
