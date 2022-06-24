@@ -61,14 +61,14 @@ dependencies {
 
 //    Firebase dependencies
 
-    implementation 'com.google.firebase:firebase-auth:19.2.0'
+    implementation 'com.google.firebase:firebase-auth:21.0.5'
     implementation 'com.google.firebase:firebase-database:20.0.5'
-    implementation 'com.google.firebase:firebase-auth-ktx:21.0.4'
-    implementation 'com.google.firebase:firebase-storage-ktx:20.0.0'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.5'
+    implementation 'com.google.firebase:firebase-storage-ktx:20.0.1'
     implementation 'com.google.firebase:firebase-database-ktx'
     implementation platform('com.google.firebase:firebase-bom:26.3.0')
 
 //    Custom loader dependency
-    
+
     implementation 'com.tuyenmonkey:mkloader:1.4.0'
 }

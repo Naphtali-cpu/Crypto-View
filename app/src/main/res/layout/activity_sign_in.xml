@@ -130,21 +130,4 @@
         android:textColor="#14213D"
         android:textSize="25dp" />
 
-    <!--    <TextView-->
-    <!--        android:id="@+id/textView3"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginVertical="150dp"-->
-    <!--        android:layout_marginLeft="60dp"-->
-    <!--        android:fontFamily="@font/poppins"-->
-    <!--        android:text="Sign In To Your Account"-->
-    <!--        android:textColor="#14213D"-->
-    <!--        android:textSize="25sp"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.496"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        tools:ignore="MissingConstraints,UnknownId"-->
-    <!--        tools:layout_editor_absoluteY="200dp" />-->
-
-
 </RelativeLayout>
