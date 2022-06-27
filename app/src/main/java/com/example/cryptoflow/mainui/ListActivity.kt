@@ -9,13 +9,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoflow.R
 import com.example.cryptoflow.adapters.CryptoListAdapter
+import com.example.cryptoflow.adapters.HomeNewsAdapter
+import com.example.cryptoflow.adapters.NewsAdapter
 import com.example.cryptoflow.api.ApiInterface
 import com.example.cryptoflow.data.CryptoData
 import com.example.cryptoflow.sessions.LoginPref
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_list.*
+import kotlinx.android.synthetic.main.activity_news.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
@@ -24,6 +28,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
 
 const val BASE_URL = "https://api.coingecko.com/api/v3/"
 
@@ -44,6 +49,8 @@ class ListActivity : AppCompatActivity() {
         linearLayoutManager = LinearLayoutManager(this)
         recyclerviewlist.layoutManager = linearLayoutManager
         getMyData()
+        recyclerHomeNews.layoutManager = LinearLayoutManager(this)
+        getHomeNews()
 
 //        Pagination for our lists
 
@@ -99,6 +106,36 @@ class ListActivity : AppCompatActivity() {
 
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+//    Get homepage news function
+
+    private fun getHomeNews() {
+        val url = "https://api.polygon.io/v2/reference/news?apiKey=ilQSt9FKzshy2TT8ft25pwWqNhggcfmD"
+
+        val request = Request.Builder().url(url).build()
+        val client = OkHttpClient()
+        client.newCall(request).enqueue(object: okhttp3.Callback {
+            override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
+                val body = response.body?.string()
+                println(body)
+
+                val gson = GsonBuilder().create()
+                val homeFeed = gson.fromJson(body, HomeFeed::class.java)
+
+//                Display our data on the view through the adapter
+
+                runOnUiThread {
+                    recyclerHomeNews.adapter = HomeNewsAdapter(homeFeed)
+                }
+
+            }
+
+            override fun onFailure(call: okhttp3.Call, e: IOException) {
+                println("Failed to execute request")
             }
 
         })
