@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoflow.R
 import com.example.cryptoflow.adapters.CryptoListAdapter
 import com.example.cryptoflow.api.ApiInterface
@@ -31,6 +32,10 @@ class ListActivity : AppCompatActivity() {
     lateinit var session: LoginPref
     lateinit var myAdapter: CryptoListAdapter
     lateinit var linearLayoutManager: LinearLayoutManager
+
+    var page = 1
+    var isLoading = false
+    var limit = 10
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
@@ -39,6 +44,26 @@ class ListActivity : AppCompatActivity() {
         linearLayoutManager = LinearLayoutManager(this)
         recyclerviewlist.layoutManager = linearLayoutManager
         getMyData()
+
+//        Pagination for our lists
+
+        recyclerviewlist.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//                if (dy > 0) {
+                val visibleItemCount = linearLayoutManager.childCount
+                val pastVisibleItem = linearLayoutManager.findFirstCompletelyVisibleItemPosition()
+                val total = myAdapter.itemCount
+
+                if (!isLoading) {
+                    if ((visibleItemCount + pastVisibleItem) >= total) {
+                        page++
+                        getMyData()
+                    }
+                }
+//                }
+                super.onScrolled(recyclerView, dx, dy)
+            }
+        })
 
 //        Bottom bar navigation implementation
 
@@ -64,7 +89,8 @@ class ListActivity : AppCompatActivity() {
 
 //        Get user's username from firebase database
 
-        database = FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance().currentUser!!.uid).child("usernamesignup")
+        database = FirebaseDatabase.getInstance().getReference("users")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid).child("usernamesignup")
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val value = snapshot.value.toString()
@@ -81,6 +107,7 @@ class ListActivity : AppCompatActivity() {
 //    Retrofit implementation for fetching all coins in the market
 
     private fun getMyData() {
+        isLoading = true
         val okhttpHttpLoggingInterceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
@@ -98,14 +125,18 @@ class ListActivity : AppCompatActivity() {
 
         val retrofitData = retrofitBuilder.getCrypto().enqueue(object :
             Callback<List<CryptoData>> {
-            override fun onResponse(call: Call<List<CryptoData>>, response: Response<List<CryptoData>>) {
+            override fun onResponse(
+                call: Call<List<CryptoData>>,
+                response: Response<List<CryptoData>>
+            ) {
                 hideProgressBar()
-                if(response?.body() != null) {
+                if (response?.body() != null) {
                     myAdapter = CryptoListAdapter(baseContext, response.body()!!)
                     recyclerviewlist.adapter = myAdapter
                     myAdapter.notifyDataSetChanged()
 
                 }
+                isLoading = false
             }
 
             override fun onFailure(call: Call<List<CryptoData>>, t: Throwable) {
@@ -114,6 +145,7 @@ class ListActivity : AppCompatActivity() {
             }
         })
     }
+
     private fun hideProgressBar() {
         newLoader.setVisibility(View.GONE)
     }
