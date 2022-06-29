@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.OrientationHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoflow.R
 import com.example.cryptoflow.adapters.CryptoListAdapter
@@ -49,7 +50,7 @@ class ListActivity : AppCompatActivity() {
         linearLayoutManager = LinearLayoutManager(this)
         recyclerviewlist.layoutManager = linearLayoutManager
         getMyData()
-        recyclerHomeNews.layoutManager = LinearLayoutManager(this)
+        recyclerHomeNews.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         getHomeNews()
 
 //        Pagination for our lists
