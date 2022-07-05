@@ -35,7 +35,7 @@ class LoginPref {
         if (!this.isLoggedIn()) {
             var i: Intent = Intent(con, SignIn::class.java)
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            i.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             con.startActivity(i)
         }
     }
@@ -45,7 +45,7 @@ class LoginPref {
     fun getUserDetails(): HashMap<String, String> {
         var user: Map<String, String> = HashMap<String, String>()
         (user as HashMap).put(KEY_EMAIL, pref.getString(KEY_EMAIL, null)!!)
-        (user as HashMap).put(PASSWORD, pref.getString(PASSWORD, null)!!)
+        user.put(PASSWORD, pref.getString(PASSWORD, null)!!)
         return user
     }
 
@@ -54,7 +54,7 @@ class LoginPref {
         editor.commit()
         var i : Intent = Intent(con, SignIn::class.java)
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        i.flags = Intent.FLAG_ACTIVITY_NEW_TASK
     }
 
     fun isLoggedIn(): Boolean {

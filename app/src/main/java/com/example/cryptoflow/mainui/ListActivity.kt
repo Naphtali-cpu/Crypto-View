@@ -5,12 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.OrientationHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoflow.R
 import com.example.cryptoflow.adapters.CryptoListAdapter
-import com.example.cryptoflow.adapters.HomeNewsAdapter
 import com.example.cryptoflow.adapters.NewsAdapter
 import com.example.cryptoflow.api.ApiInterface
 import com.example.cryptoflow.data.CryptoData
@@ -50,8 +50,7 @@ class ListActivity : AppCompatActivity() {
         linearLayoutManager = LinearLayoutManager(this)
         recyclerviewlist.layoutManager = linearLayoutManager
         getMyData()
-        recyclerHomeNews.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        getHomeNews()
+
 
 //        Pagination for our lists
 
@@ -112,36 +111,6 @@ class ListActivity : AppCompatActivity() {
         })
     }
 
-//    Get homepage news function
-
-    private fun getHomeNews() {
-        val url = "https://api.polygon.io/v2/reference/news?apiKey=ilQSt9FKzshy2TT8ft25pwWqNhggcfmD"
-
-        val request = Request.Builder().url(url).build()
-        val client = OkHttpClient()
-        client.newCall(request).enqueue(object: okhttp3.Callback {
-            override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
-                val body = response.body?.string()
-                println(body)
-
-                val gson = GsonBuilder().create()
-                val homeFeed = gson.fromJson(body, HomeFeed::class.java)
-
-//                Display our data on the view through the adapter
-
-                runOnUiThread {
-                    recyclerHomeNews.adapter = HomeNewsAdapter(homeFeed)
-                }
-
-            }
-
-            override fun onFailure(call: okhttp3.Call, e: IOException) {
-                println("Failed to execute request")
-            }
-
-        })
-    }
-
 //    Retrofit implementation for fetching all coins in the market
 
     private fun getMyData() {
@@ -168,23 +137,21 @@ class ListActivity : AppCompatActivity() {
                 response: Response<List<CryptoData>>
             ) {
                 hideProgressBar()
-                if (response?.body() != null) {
-                    myAdapter = CryptoListAdapter(baseContext, response.body()!!)
-                    recyclerviewlist.adapter = myAdapter
-                    myAdapter.notifyDataSetChanged()
-
-                }
+                myAdapter = CryptoListAdapter(baseContext, response.body()!!)
+                recyclerviewlist.adapter = myAdapter
+                myAdapter.notifyDataSetChanged()
                 isLoading = false
             }
 
             override fun onFailure(call: Call<List<CryptoData>>, t: Throwable) {
                 hideProgressBar()
+                Toast.makeText(applicationContext, "Check Your Internet Connection!", Toast.LENGTH_LONG).show()
                 Log.d("ListActivity", "onFailure:" + t.message)
             }
         })
     }
 
     private fun hideProgressBar() {
-        newLoader.setVisibility(View.GONE)
+        newLoader.visibility = View.GONE
     }
 }

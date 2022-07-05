@@ -14,7 +14,12 @@ object ServiceBuilder {
 
     private const val URL = "https://api.coingecko.com/api/v3/"
 
-    private val logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+    private val logger = run {
+        val httpLoggingInterceptor = HttpLoggingInterceptor()
+        httpLoggingInterceptor.apply {
+            httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        }
+    }
 
     val headerInterceptor = object: Interceptor {
 

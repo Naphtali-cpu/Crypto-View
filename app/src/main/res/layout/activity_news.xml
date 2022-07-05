@@ -8,6 +8,25 @@
     android:background="#F8F9FA"
     tools:context=".mainui.NewsActivity">
 
+    <com.tuyenmonkey.mkloader.MKLoader
+        android:id="@+id/newNewsLoader"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="180dp"
+        android:layout_marginLeft="180dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginEnd="181dp"
+        android:layout_marginBottom="381dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:mk_color="#0466C8"
+        app:mk_type="Worm" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -17,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
 
             <TextView
                 android:layout_width="wrap_content"

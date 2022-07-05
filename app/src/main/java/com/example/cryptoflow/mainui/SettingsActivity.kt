@@ -32,7 +32,7 @@ class SettingsActivity : AppCompatActivity() {
             false
         })
 
-        val forward = findViewById(R.id.nextinfo) as ImageView
+        val forward = findViewById<ImageView>(R.id.nextinfo)
         forward.setOnClickListener {
             val intent = Intent(this, AppInfo::class.java)
             startActivity(intent)

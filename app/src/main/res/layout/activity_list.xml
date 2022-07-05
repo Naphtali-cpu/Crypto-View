@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EBF3FB"
+    android:background="?attr/background_color"
     android:fillViewport="true"
     tools:context=".mainui.ListActivity"
     tools:ignore="HardcodedText">
@@ -21,34 +21,46 @@
         app:mk_color="#0466C8"
         app:mk_type="Worm" />
 
+
     <ScrollView
         android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#EBF3FB"
+            android:background="?attr/background_color"
             tools:ignore="HardcodedText">
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:fontFamily="@font/poppins_medium"
                 android:gravity="center_horizontal"
                 android:padding="20dp"
                 android:text="Hello, "
-                android:textColor="#14213D"
+                android:textColor="?attr/text_color"
                 android:textSize="25sp"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btn_dark_theme"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/bulb"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -59,7 +71,7 @@
                 android:fontFamily="@font/poppins_semibold"
                 android:padding="20dp"
                 android:text="Naphtali "
-                android:textColor="#14213D"
+                android:textColor="?attr/text_color"
                 android:textSize="25sp"
                 app:layout_constraintEnd_toEndOf="@+id/textView"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -75,39 +87,24 @@
                 android:fontFamily="@font/poppins_medium"
                 android:padding="20dp"
                 android:text="Get latest cryptocurrency updates today!! "
-                android:textColor="#14213D"
+                android:textColor="?attr/text_color"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/country_search"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/searchview_background"
-                android:textCursorDrawable="@null"
-                app:iconifiedByDefault="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/welcometxt"
-                app:queryBackground="@null"
-                app:queryHint="Search Coins..." />
-
             <HorizontalScrollView
                 android:id="@+id/newsRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="-40dp"
                 android:padding="20dp"
                 android:scrollbars="none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/country_search">
+                app:layout_constraintTop_toBottomOf="@+id/welcometxt">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -118,14 +115,205 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recyclerHomeNews"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/globalMarketCard"
+                            android:layout_width="200dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="8dp"
+                            android:theme="@style/Theme.MaterialComponents.DayNight"
+                            app:cardBackgroundColor="#2196F3"
+                            app:cardCornerRadius="5dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <!-- Media -->
+                                <!--            <ImageView-->
+                                <!--                android:layout_width="match_parent"-->
+                                <!--                android:layout_height="194dp"-->
+                                <!--                android:scaleType="centerCrop"-->
+                                <!--                android:id="@+id/requestimagepest"-->
+                                <!--                />-->
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:padding="16dp">
+
+                                    <!-- Title, secondary and supporting text -->
+
+
+                                    <TextView
+                                        android:id="@+id/globalText"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="-5dp"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:text="Global Market Cap"
+                                        android:textColor="#F1F1F1"
+                                        android:textSize="15dp" />
+
+                                    <TextView
+                                        android:id="@+id/globalFigures"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="-3dp"
+                                        android:fontFamily="@font/poppins_medium"
+                                        android:text="300 Trillion "
+                                        android:textColor="#C0F4C2"
+                                        android:textSize="13dp" />
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="20dp">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/coinsCard"
+                            android:layout_width="200dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="8dp"
+                            android:theme="@style/Theme.MaterialComponents.DayNight"
+                            app:cardBackgroundColor="#2196F3"
+                            app:cardCornerRadius="5dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <!-- Media -->
+                                <!--            <ImageView-->
+                                <!--                android:layout_width="match_parent"-->
+                                <!--                android:layout_height="194dp"-->
+                                <!--                android:scaleType="centerCrop"-->
+                                <!--                android:id="@+id/requestimagepest"-->
+                                <!--                />-->
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:padding="16dp">
+
+                                    <!-- Title, secondary and supporting text -->
+
+
+                                    <TextView
+                                        android:id="@+id/coinsTotal"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="-5dp"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:text="Coins"
+                                        android:textColor="#F1F1F1"
+                                        android:textSize="15dp" />
+
+                                    <TextView
+                                        android:id="@+id/coinsFigures"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="-3dp"
+                                        android:fontFamily="@font/poppins_medium"
+                                        android:text="300"
+                                        android:textColor="#C0F4C2"
+                                        android:textSize="13dp" />
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="20dp">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/pestcard"
+                            android:layout_width="200dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="8dp"
+                            android:theme="@style/Theme.MaterialComponents.DayNight"
+                            app:cardBackgroundColor="#2196F3"
+                            app:cardCornerRadius="5dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <!-- Media -->
+                                <!--            <ImageView-->
+                                <!--                android:layout_width="match_parent"-->
+                                <!--                android:layout_height="194dp"-->
+                                <!--                android:scaleType="centerCrop"-->
+                                <!--                android:id="@+id/requestimagepest"-->
+                                <!--                />-->
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:padding="16dp">
+
+                                    <!-- Title, secondary and supporting text -->
+
+
+                                    <TextView
+                                        android:id="@+id/pestname"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="-5dp"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:text="24 hr Vol"
+                                        android:textColor="#F1F1F1"
+                                        android:textSize="15dp" />
+
+                                    <TextView
+                                        android:id="@+id/parasite"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="-3dp"
+                                        android:fontFamily="@font/poppins_medium"
+                                        android:text="300 Trillion"
+                                        android:textColor="#C0F4C2"
+                                        android:textSize="13dp" />
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -133,11 +321,26 @@
 
             </HorizontalScrollView>
 
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/country_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/searchview_background"
+                android:textCursorDrawable="@null"
+                app:iconifiedByDefault="false"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:queryBackground="@null"
+                app:queryHint="Search Coins..." />
+
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="60dp"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal"
                 android:weightSum="2"
@@ -179,7 +382,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

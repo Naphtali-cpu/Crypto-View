@@ -72,4 +72,8 @@ dependencies {
 
     implementation 'com.tuyenmonkey:mkloader:1.4.0'
 
+
+//    Graph view dependency
+
+    implementation 'com.robinhood.spark:spark:1.2.0'
 }
