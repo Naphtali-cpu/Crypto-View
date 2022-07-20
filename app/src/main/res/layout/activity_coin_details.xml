@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:background="#EBF3FB">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,8 +39,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="-46dp"
                 android:layout_marginLeft="70dp"
+                android:layout_marginTop="-46dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Market Stats"
                 android:textColor="#282D3E"
@@ -177,7 +178,6 @@
                 android:textSize="15dp" />
 
         </LinearLayout>
-
 
         <TextView
             android:id="@+id/textCoin"

@@ -17,6 +17,7 @@ import com.example.cryptoflow.data.Tickers
 import com.example.cryptoflow.mainui.CoinDetails
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.cryptolist.view.*
+import java.text.NumberFormat
 
 class CryptoListAdapter(val context: Context, val userList: List<CryptoData>) : RecyclerView.Adapter<CryptoListAdapter.CryptoViewHolder>(){
 
@@ -51,7 +52,7 @@ class CryptoListAdapter(val context: Context, val userList: List<CryptoData>) : 
     override fun onBindViewHolder(holder: CryptoViewHolder, position: Int) {
         holder.cryptoName.text = userList[position].name
         holder.initials.text = userList[position].symbol
-        holder.cryptoPrice.text = "$" + userList[position].current_price
+        holder.cryptoPrice.text = "$ ${NumberFormat.getInstance().format(userList[position].current_price)}"
 
         val imageLink = holder.cryptoImage.logo
         Picasso.with(holder.cryptoImage.context).load(userList[position].image).into(imageLink)
@@ -75,7 +76,7 @@ class CryptoListAdapter(val context: Context, val userList: List<CryptoData>) : 
             intent.putExtra("marketcap", userList[position].market_cap)
             intent.putExtra("lastupdate", userList[position].last_updated)
             intent.putExtra("totalvolume", userList[position].total_volume)
-            intent.putExtra("currentprice", userList[position].current_price)
+            intent.putExtra("currentprice", NumberFormat.getInstance().format(userList[position].current_price))
             intent.putExtra("popularity", userList[position].market_cap_rank)
             intent.putExtra("logourl", userList[position].image)
             context.startActivity(intent)
