@@ -71,7 +71,9 @@ class CryptoListAdapter(val context: Context, val userList: List<CryptoData>) : 
         holder.listCoin.setOnClickListener { v ->
             val context = v.context
             val intent = Intent(context, CoinDetails::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            intent.putExtra("id", userList[position].id)
+            intent.putExtra("percent", userList[position].price_change_percentage_24h)
             intent.putExtra("name", userList[position].name)
             intent.putExtra("marketcap", userList[position].market_cap)
             intent.putExtra("lastupdate", userList[position].last_updated)

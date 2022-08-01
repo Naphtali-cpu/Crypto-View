@@ -1,9 +1,8 @@
 package com.example.cryptoflow.mainui
 
 import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
 import android.content.Intent
-import android.graphics.DashPathEffect
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
@@ -12,14 +11,15 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.cryptoflow.R
 import com.example.cryptoflow.adapters.CryptoGraphAdapter
 import com.example.cryptoflow.api.ApiInterface
-import com.example.cryptoflow.api.ModuleItem
-import com.example.cryptoflow.data.CoinPrice
 import com.example.cryptoflow.data.CryptoData
-import com.example.cryptoflow.data.GraphData
+import com.example.cryptoflow.data.cryptodetailmodel.TestDetailData
+import com.example.cryptoflow.data.graphmodel.GraphData
+import com.example.cryptoflow.data.graphmodel.GraphDataSubList
 import com.google.gson.GsonBuilder
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_coin_details.*
-import kotlinx.android.synthetic.main.activity_sign_in.*
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,44 +34,17 @@ class CoinDetails : AppCompatActivity() {
     }
 
     private lateinit var adapter: CryptoGraphAdapter
-    private lateinit var newgraphdata: List<CryptoData>
+    private lateinit var newgraphdata: ArrayList<GraphDataSubList>
 
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coin_details)
+        
 
-        val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
-        val retrofit = Retrofit.Builder()
-            .baseUrl(BASEGRAPH_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
-        val covidService = retrofit.create(ApiInterface::class.java)
-
-        covidService.getCrypto().enqueue(object : Callback<List<CryptoData>> {
-            override fun onResponse(
-                call: Call<List<CryptoData>>,
-                response: Response<List<CryptoData>>
-            ) {
-                Log.i(TAG, "onResponse $response")
-                val nationalData = response.body()
-                if (nationalData == null) {
-                    Log.w("TAGTEST", "Did not receive a valid response body")
-                    return
-                }
-                setupEventListeners()
-
-                newgraphdata = nationalData.reversed()
-                Log.i(TAG, "Update graph with national data")
-                updateDisplayWithData(newgraphdata)
-            }
-
-            override fun onFailure(call: Call<List<CryptoData>>, t: Throwable) {
-                Log.e(TAG, "onFailure $t")
-            }
-
-        })
+        val id = intent.getStringExtra("id")
+        val percent = intent.getStringExtra("percent")
         val coinName = intent.getStringExtra("name")
         val marketCap = intent.getStringExtra("marketcap")
         val lastUpdate = intent.getStringExtra("lastupdate")
@@ -80,8 +53,20 @@ class CoinDetails : AppCompatActivity() {
         val popularity = intent.getStringExtra("popularity")
         val coinLogo = intent.getStringExtra("logourl")
         val imageCoin: ImageView = findViewById(R.id.coin)
-
+        getDetailData(id)
+        plotGraphData(id)
+        
         textCoin.text = coinName
+
+        if (percent != null) {
+            if (percent >= 0.toString()) {
+                coinPercent.text = "${percent} %"
+                coinPercent.setTextColor(Color.parseColor("#4CAF50"))
+            } else {
+                coinPercent.text = "${percent} %"
+                coinPercent.setTextColor(Color.parseColor("#DF2F2F"))
+            }
+        }
 
 //        Checking size of the marketcap values and replacing with trillion, billion etc
 
@@ -128,7 +113,80 @@ class CoinDetails : AppCompatActivity() {
 
     }
 
-    private fun updateDisplayWithData(newgraphdata: List<CryptoData>) {
+    private fun plotGraphData(id: String?) {
+        val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASEGRAPH_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+        val covidService = retrofit.create(ApiInterface::class.java)
+
+        covidService.getGraphData(id.toString()).enqueue(object : Callback<ArrayList<GraphDataSubList>> {
+            override fun onResponse(
+                call: Call<ArrayList<GraphDataSubList>>,
+                response: Response<ArrayList<GraphDataSubList>>
+            ) {
+                Log.i("TAG", "onResponse $response")
+                val nationalData = response.body()
+                if (nationalData == null) {
+                    Log.w("TAGTEST", "Did not receive a valid response body")
+                    return
+                }
+                setupEventListeners()
+
+                newgraphdata = nationalData.reversed() as ArrayList<GraphDataSubList>
+                Log.i("TAG", "Update graph with national data")
+                updateDisplayWithData(newgraphdata)
+            }
+
+            override fun onFailure(call: Call<ArrayList<GraphDataSubList>>, t: Throwable) {
+                Log.e("TAG", "onFailure $t")
+            }
+
+        })
+    }
+
+    private fun getDetailData(id: String?) {
+        val okhttpHttpLoggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+
+        val okHttpClient = OkHttpClient.Builder().addInterceptor(
+            okhttpHttpLoggingInterceptor
+        )
+
+        val retrofitBuilder = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(BASE_URL)
+            .client(okHttpClient.build())
+            .build()
+            .create(ApiInterface::class.java)
+
+        val retrofitData = retrofitBuilder.getCurrentData(id.toString()).enqueue(object :
+            Callback<TestDetailData> {
+            override fun onResponse(
+                call: Call<TestDetailData>,
+                response: Response<TestDetailData>
+            ) {
+                if (response.isSuccessful) {
+                    val destination = response.body()
+                    destination?.let {
+                        aboutCoin.setText(destination.description.en)
+                    }
+                } else {
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<TestDetailData>, t: Throwable) {
+                Toast.makeText(applicationContext, "Something went wrong on our side", Toast.LENGTH_LONG).show()
+                Log.d("ListActivity", "onFailure:" + t.message)
+            }
+        })
+    }
+
+    private fun updateDisplayWithData(newgraphdata: ArrayList<GraphDataSubList>) {
         adapter = CryptoGraphAdapter(newgraphdata)
         stockChartData.adapter = adapter
     }
