@@ -1,35 +1,31 @@
 package com.example.cryptoflow.mainui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.OrientationHelper
-import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoflow.R
 import com.example.cryptoflow.adapters.CryptoListAdapter
-import com.example.cryptoflow.adapters.NewsAdapter
 import com.example.cryptoflow.api.ApiInterface
 import com.example.cryptoflow.data.CryptoData
 import com.example.cryptoflow.sessions.LoginPref
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_list.*
 import kotlinx.android.synthetic.main.activity_news.*
 import okhttp3.OkHttpClient
-import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.IOException
+
 
 const val BASE_URL = "https://api.coingecko.com/api/v3/"
 
@@ -39,40 +35,28 @@ class ListActivity : AppCompatActivity() {
     lateinit var myAdapter: CryptoListAdapter
     lateinit var linearLayoutManager: LinearLayoutManager
 
-    var page = 1
-    var isLoading = false
-    var limit = 10
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
+        initRecycler()
+        getMyData()
+        userNameFirebase()
+        bottomBar()
+    }
+
+//    Initialize recyclerview
+
+    private fun initRecycler() {
 
         recyclerviewlist.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
         recyclerviewlist.layoutManager = linearLayoutManager
-        getMyData()
 
+    }
 
-//        Pagination for our lists
+    //        Bottom bar navigation implementation
 
-        recyclerviewlist.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                if (dy > 0) {
-                val visibleItemCount = linearLayoutManager.childCount
-                val pastVisibleItem = linearLayoutManager.findFirstCompletelyVisibleItemPosition()
-                val total = myAdapter.itemCount
-
-                if (!isLoading) {
-                    if ((visibleItemCount + pastVisibleItem) >= total) {
-                        page++
-                        getMyData()
-                    }
-                }
-//                }
-                super.onScrolled(recyclerView, dx, dy)
-            }
-        })
-
-//        Bottom bar navigation implementation
+    private fun bottomBar() {
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView.selectedItemId = R.id.nav_home
@@ -93,8 +77,10 @@ class ListActivity : AppCompatActivity() {
             }
             false
         })
+    }
 
-//        Get user's username from firebase database
+    //        Get user's username from firebase database
+    private fun userNameFirebase() {
 
         database = FirebaseDatabase.getInstance().getReference("users")
             .child(FirebaseAuth.getInstance().currentUser!!.uid).child("usernamesignup")
@@ -114,7 +100,6 @@ class ListActivity : AppCompatActivity() {
 //    Retrofit implementation for fetching all coins in the market
 
     private fun getMyData() {
-        isLoading = true
         val okhttpHttpLoggingInterceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
@@ -140,7 +125,6 @@ class ListActivity : AppCompatActivity() {
                 myAdapter = CryptoListAdapter(baseContext, response.body()!!)
                 recyclerviewlist.adapter = myAdapter
                 myAdapter.notifyDataSetChanged()
-                isLoading = false
             }
 
             override fun onFailure(call: Call<List<CryptoData>>, t: Throwable) {

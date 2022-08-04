@@ -7,6 +7,8 @@ import android.graphics.Color.green
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -18,8 +20,10 @@ import com.example.cryptoflow.mainui.CoinDetails
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.cryptolist.view.*
 import java.text.NumberFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
-class CryptoListAdapter(val context: Context, val userList: List<CryptoData>) : RecyclerView.Adapter<CryptoListAdapter.CryptoViewHolder>(){
+class CryptoListAdapter(val context: Context, var userList: List<CryptoData>) : RecyclerView.Adapter<CryptoListAdapter.CryptoViewHolder>(), Filterable{
 
     inner class CryptoViewHolder(view : View) : RecyclerView.ViewHolder(view){
         var cryptoName: TextView
@@ -83,5 +87,36 @@ class CryptoListAdapter(val context: Context, val userList: List<CryptoData>) : 
             intent.putExtra("logourl", userList[position].image)
             context.startActivity(intent)
         }
+    }
+
+    override fun getFilter(): Filter {
+        return myFilter
+    }
+
+    var myFilter: Filter = object : Filter() {
+        override fun performFiltering(charSequence: CharSequence?): FilterResults {
+            val charSearch = charSequence.toString()
+            val filteredList: MutableList<CryptoData> = ArrayList()
+            if (charSequence == null || charSequence.length == 0) {
+                filteredList.addAll(userList)
+            } else {
+                for (row in userList) {
+                    if (row.name.toLowerCase(Locale.ROOT).contains(charSearch.toLowerCase(Locale.ROOT))) {
+                        filteredList.add(row)
+                    }
+                }
+                userList = filteredList
+            }
+            val filterResult = FilterResults()
+            filterResult.values = filteredList
+            return filterResult
+        }
+
+        @SuppressLint("NotifyDataSetChanged")
+        override fun publishResults(charSequence: CharSequence?, filterResult: FilterResults?) {
+            userList = filterResult?.values as List<CryptoData>
+            notifyDataSetChanged()
+        }
+
     }
 }

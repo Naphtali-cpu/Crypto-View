@@ -78,31 +78,41 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-            <com.robinhood.spark.SparkView
-                android:id="@+id/stockChartData"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardChartData"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/gradient_background"
+                android:layout_marginTop="32dp"
+                app:cardCornerRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/coin"
-                app:spark_animateChanges="true"
-                app:spark_lineColor="#03519E"
-                app:spark_scrubEnabled="true" />
+                app:layout_constraintTop_toBottomOf="@+id/coin">
+
+                <com.robinhood.spark.SparkView
+                    android:id="@+id/stockChartData"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:background="@drawable/gradient_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:spark_animateChanges="true"
+                    app:spark_lineColor="#03519E"
+                    app:spark_scrubEnabled="true" />
+
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/pestnamedetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="60dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Market Stats"
                 android:textColor="#050A1A"
                 android:textSize="20dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/stockChartData" />
+                app:layout_constraintTop_toBottomOf="@+id/cardChartData" />
 
             <ImageView
                 android:id="@+id/vol"
@@ -180,14 +190,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="112dp"
+                android:layout_marginTop="103dp"
                 android:layout_marginEnd="4dp"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="  "
+                android:text=" hshtydt "
                 android:textColor="#282D3E"
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/stockChartData" />
+                app:layout_constraintTop_toBottomOf="@+id/cardChartData" />
 
             <ImageView
                 android:id="@+id/rank"
@@ -236,7 +246,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="50dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="About "
                 android:textColor="#050A1A"
@@ -258,6 +268,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -282,7 +293,14 @@
             android:layout_marginEnd="344dp"
             android:src="@drawable/backto" />
 
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="450dp" />
 
-
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="670dp" />
     </RelativeLayout>
 </ScrollView>
