@@ -7,10 +7,7 @@ import android.widget.Toast
 import com.example.cryptoflow.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.ktx.app
@@ -25,7 +22,11 @@ class SignUp : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
-        signUpUser()
+
+        val fullName = usernamesignup.text.toString()
+        val userName = usernamesignup.text.toString()
+        signUpUser(fullName, userName)
+
 
         redirectsignin.setOnClickListener {
             val intent = Intent(this, SignIn::class.java)
@@ -33,7 +34,7 @@ class SignUp : AppCompatActivity() {
         }
     }
 
-    private fun signUpUser() {
+    private fun signUpUser(fullName: String, userName: String) {
         signupbutton.setOnClickListener {
             val username = usernamesignup.text.toString()
             val email = signupemail.text.toString()
@@ -47,22 +48,50 @@ class SignUp : AppCompatActivity() {
 
 //                Authenticating user and saving their username to Firebase Database
 
+//    Get current user id
+    val currentUserId = FirebaseAuth.getInstance().currentUser!!.uid
+                val userMap = HashMap<String, Any>()
+                userMap["uid"] = currentUserId
+                userMap["fullname"] = fullName
+                userMap["username"] = userName.toLowerCase()
+                userMap["email"] = email
+                userMap["bio"] = "Hey! I am using CryptoView!"
+                userMap["image"] =
+                    "gs://instagram-clone-app-205f9.appspot.com/Default images/profile.png"
+
                 mAuth.createUserWithEmailAndPassword(email, pass)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            databaseReference.child("users").addListenerForSingleValueEvent(object : ValueEventListener {
-                                override fun onDataChange(snapshot: DataSnapshot) {
-                                    databaseReference.child("users").child(FirebaseAuth.getInstance().currentUser!!.uid).child("usernamesignup").setValue(username)
-                                    databaseReference.child("users").child(FirebaseAuth.getInstance().currentUser!!.uid).child("emailaddress").setValue(email)
-                                }
-                                override fun onCancelled(error: DatabaseError) {
-                                    TODO("Not yet implemented")
-                                }
-                            })
-                            Toast.makeText(applicationContext, "User registered successfully", Toast.LENGTH_SHORT).show()
+                            databaseReference.child("users")
+                                .addListenerForSingleValueEvent(object : ValueEventListener {
+                                    override fun onDataChange(snapshot: DataSnapshot) {
+                                        databaseReference.child("users")
+                                            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+                                            .child("usernamesignup").setValue(username)
+                                        databaseReference.child("users")
+                                            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+                                            .child("emailaddress").setValue(email)
+                                        databaseReference.child("Follow").child(currentUserId)
+                                            .child("Following").child(currentUserId)
+                                            .setValue(true)
+                                    }
+
+                                    override fun onCancelled(error: DatabaseError) {
+                                        TODO("Not yet implemented")
+                                    }
+                                })
+                            Toast.makeText(
+                                applicationContext,
+                                "User registered successfully",
+                                Toast.LENGTH_SHORT
+                            ).show()
                             startActivity(Intent(applicationContext, SignIn::class.java))
                         } else {
-                            Toast.makeText(applicationContext, "Registration Error: " + task.exception?.message.toString(),Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                applicationContext,
+                                "Registration Error: " + task.exception?.message.toString(),
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
             }

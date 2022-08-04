@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CryptoFlow">
         <activity
+            android:name=".mainui.Networking"
+            android:exported="false" />
+        <activity
+            android:name=".mainui.Profile"
+            android:exported="false" />
+        <activity
             android:name=".webview.NewsView"
             android:exported="false" />
         <activity

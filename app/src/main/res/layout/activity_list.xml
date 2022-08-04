@@ -21,6 +21,18 @@
         app:mk_color="#0466C8"
         app:mk_type="Worm" />
 
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/link_to_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:contentDescription="Post"
+        android:text="Post"
+        app:icon="@drawable/edit_post"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
     <ScrollView
         android:id="@+id/scrollView3"

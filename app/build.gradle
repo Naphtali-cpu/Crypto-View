@@ -48,19 +48,16 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
 //    Retrofit, Okhttp dependency
-
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
 
 //    Picasso, Glide dependencies
-
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
 //    Firebase dependencies
-
     implementation 'com.google.firebase:firebase-auth:21.0.5'
     implementation 'com.google.firebase:firebase-database:20.0.5'
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.5'
@@ -69,11 +66,12 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:26.3.0')
 
 //    Custom loader dependency
-
     implementation 'com.tuyenmonkey:mkloader:1.4.0'
 
 
 //    Graph view dependency
-
     implementation 'com.robinhood.spark:spark:1.2.0'
+
+//    Lottie Animation
+    implementation 'com.airbnb.android:lottie:5.0.3'
 }

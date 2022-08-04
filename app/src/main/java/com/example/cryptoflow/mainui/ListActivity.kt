@@ -42,6 +42,14 @@ class ListActivity : AppCompatActivity() {
         getMyData()
         userNameFirebase()
         bottomBar()
+        redirectPostThoughts()
+    }
+
+    private fun redirectPostThoughts() {
+        link_to_post.setOnClickListener {
+            val intent = Intent(this, Networking::class.java)
+            startActivity(intent)
+        }
     }
 
 //    Initialize recyclerview

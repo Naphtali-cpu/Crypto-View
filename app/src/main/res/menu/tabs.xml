@@ -4,13 +4,25 @@
         android:id="@+id/nav_home"
         android:icon="@drawable/newhome"
         android:title="Home" />
+
+    <item
+        android:id="@+id/nav_network"
+        android:icon="@drawable/network"
+        android:title="Home" />
+
     <item
         android:id="@+id/nav_news"
         android:icon="@drawable/news"
         android:title= "Feed" />
+
     <item
         android:id="@+id/nav_settings"
         android:icon="@drawable/newset"
         android:title="Settings" />
+
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/profile"
+        android:title="Profile" />
 
 </menu>
