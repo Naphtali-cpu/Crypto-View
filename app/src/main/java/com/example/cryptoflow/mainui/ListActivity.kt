@@ -81,6 +81,11 @@ class ListActivity : AppCompatActivity() {
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }
+                R.id.nav_network -> {
+                    startActivity(Intent(applicationContext, PostsActivity::class.java))
+                    overridePendingTransition(0, 0)
+                    return@OnNavigationItemSelectedListener true
+                }
 
             }
             false

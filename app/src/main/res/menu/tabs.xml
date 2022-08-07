@@ -8,7 +8,7 @@
     <item
         android:id="@+id/nav_network"
         android:icon="@drawable/network"
-        android:title="Home" />
+        android:title="Posts" />
 
     <item
         android:id="@+id/nav_news"

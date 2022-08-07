@@ -15,6 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CryptoFlow">
         <activity
+            android:name=".mainui.ShowUsersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".mainui.AddCommentActivity"
+            android:exported="false" />
+        <activity
             android:name=".mainui.PostsActivity"
             android:exported="false" />
         <activity

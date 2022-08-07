@@ -13,13 +13,14 @@
         <entry key="app/src/main/res/drawable/searchview_background.xml" value="0.146" />
         <entry key="app/src/main/res/layout/activity_2.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_app_info.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_coin_details.xml" value="0.27608695652173915" />
+        <entry key="app/src/main/res/layout/activity_coin_details.xml" value="0.10738255033557047" />
         <entry key="app/src/main/res/layout/activity_crypto_details.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.30885416666666665" />
         <entry key="app/src/main/res/layout/activity_networking.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_news.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_news_view.xml" value="0.1984375" />
+        <entry key="app/src/main/res/layout/activity_posts.xml" value="0.1984375" />
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.1984375" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.1693840579710145" />
@@ -28,7 +29,7 @@
         <entry key="app/src/main/res/layout/cryptolist.xml" value="0.22" />
         <entry key="app/src/main/res/layout/homenews.xml" value="0.33" />
         <entry key="app/src/main/res/layout/newslist.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/posts_layout.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/posts_layout.xml" value="0.22" />
         <entry key="app/src/main/res/menu/item_menu.xml" value="0.33" />
         <entry key="app/src/main/res/menu/tabs.xml" value="0.1" />
       </map>
