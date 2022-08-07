@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".mainui.Networking">
 
+    <com.tuyenmonkey.mkloader.MKLoader
+        android:id="@+id/postThoughtLoader"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:mk_color="#0466C8"
+        app:mk_type="Worm" />
+
+
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
@@ -79,10 +91,24 @@
         app:lottie_rawRes="@raw/camera"
         tools:ignore="MissingConstraints" />
 
+
+    <ImageView
+        android:id="@+id/image_view"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="300dp"
+        android:layout_height="180dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_pick_btn"
+        tools:ignore="MissingConstraints" />
+
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="192dp"
         android:orientation="vertical"
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,7 +121,7 @@
             android:layout_height="match_parent">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/signinbutton"
+                android:id="@+id/shareButton"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:background="@drawable/buttons"

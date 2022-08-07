@@ -74,4 +74,10 @@ dependencies {
 
 //    Lottie Animation
     implementation 'com.airbnb.android:lottie:5.0.3'
+
+    //user permission
+    implementation 'com.karumi:dexter:6.2.2'
+
+    //coil
+    implementation("io.coil-kt:coil:1.1.1")
 }
