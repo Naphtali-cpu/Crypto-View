@@ -1,44 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/coinList"
     android:padding="16dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/publisher_profile_image_post"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#0466C8"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/profile"
+        android:src="@drawable/face"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/publisher_user_name_post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/poppins_medium"
         android:text="Username"
         android:textColor="#000"
-        android:textSize="17dp"
+        android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toEndOf="@+id/publisher_profile_image_post"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/caption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/poppins_medium"
-        android:text="This is a comment section that will be a comment section still"
+        android:text=""
         android:textColor="#000"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,24 +70,24 @@
 
     <ImageView
         android:id="@+id/post_image_like_btn"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_marginTop="12dp"
         android:src="@drawable/likedbutton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/likes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/poppins_medium"
-        android:text="67"
+        android:text=""
         android:textColor="#000"
-        android:textSize="17dp"
+        android:textSize="15dp"
         app:layout_constraintEnd_toStartOf="@+id/post_image_comment_btn"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/post_image_like_btn"
@@ -94,25 +95,25 @@
 
     <ImageView
         android:id="@+id/post_image_comment_btn"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
         android:src="@drawable/comment"
         app:layout_constraintEnd_toStartOf="@+id/comments"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/comments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="252dp"
         android:fontFamily="@font/poppins_medium"
-        android:text="67"
+        android:text=""
         android:textColor="#000"
-        android:textSize="17dp"
+        android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 

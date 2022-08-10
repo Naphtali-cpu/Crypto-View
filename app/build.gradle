@@ -84,4 +84,7 @@ dependencies {
 //    Circle Imageview dependency
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+//    Crop image dependency
+    implementation "androidx.activity:activity-ktx:1.2.0-alpha06"
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
 }

@@ -55,7 +55,7 @@ class CryptoListAdapter(val context: Context, var userList: List<CryptoData>) : 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CryptoViewHolder, position: Int) {
         holder.cryptoName.text = userList[position].name
-        holder.initials.text = userList[position].symbol
+        holder.initials.text = userList[position].symbol.uppercase()
         holder.cryptoPrice.text = "$ ${NumberFormat.getInstance().format(userList[position].current_price)}"
 
         val imageLink = holder.cryptoImage.logo

@@ -4,70 +4,126 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoflow.R
+import com.example.cryptoflow.adapters.CryptoListAdapter
 import com.example.cryptoflow.adapters.PostAdapter
+import com.example.cryptoflow.api.ApiInterface
+import com.example.cryptoflow.data.CryptoData
 import com.example.cryptoflow.data.Post
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_posts.*
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
+const val BASE_URL = "https://api.coingecko.com/api/v3/"
 class PostsActivity : AppCompatActivity() {
 
-    private var recyclerView: RecyclerView? = null
-    private lateinit var dbref : DatabaseReference
-    private lateinit var userRecyclerview : RecyclerView
-    private lateinit var userArrayList : ArrayList<Post>
-
-
+    private lateinit var database: DatabaseReference
+    lateinit var myAdapter: CryptoListAdapter
     lateinit var linearLayoutManager: LinearLayoutManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_posts)
-
-        recycler_view_home.setHasFixedSize(true)
+        recyclerviewlist.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
-        recycler_view_home.layoutManager = linearLayoutManager
-
-        userRecyclerview = findViewById(R.id.recycler_view_home)
-        userRecyclerview.layoutManager = LinearLayoutManager(this)
-        userRecyclerview.setHasFixedSize(true)
-
-        userArrayList = arrayListOf<Post>()
-        recyclerView = findViewById(R.id.recycler_view_home)
-
-
+        recyclerviewlist.layoutManager = linearLayoutManager
+        markets.setOnClickListener {
+            getMyData()
+        }
+        getMyData()
         bottomBar()
-        retrieveUserPosts()
+        page2.setOnClickListener {
+            loadPage2()
+        }
+
     }
 
-    private fun retrieveUserPosts() {
-        dbref = FirebaseDatabase.getInstance().getReference("Posts")
+    private fun loadPage2() {
+        val okhttpHttpLoggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
 
-        dbref.addValueEventListener(object : ValueEventListener {
+        val okHttpClient = OkHttpClient.Builder().addInterceptor(
+            okhttpHttpLoggingInterceptor
+        )
 
-            override fun onDataChange(snapshot: DataSnapshot) {
+        val retrofitBuilder = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(BASE_URL)
+            .client(okHttpClient.build())
+            .build()
+            .create(ApiInterface::class.java)
 
-                if (snapshot.exists()){
-
-                    for (userSnapshot in snapshot.children){
-                        val user = userSnapshot.getValue(Post::class.java)
-                        userArrayList.add(user!!)
-                    }
-                    userRecyclerview.adapter = PostAdapter(baseContext, userArrayList)
-                }
-
+        val retrofitData = retrofitBuilder.getCrypto(100, 2).enqueue(object :
+            Callback<List<CryptoData>> {
+            override fun onResponse(
+                call: Call<List<CryptoData>>,
+                response: Response<List<CryptoData>>
+            ) {
+                hideProgressBar()
+                myAdapter = CryptoListAdapter(baseContext, response.body()!!)
+                recyclerviewlist.adapter = myAdapter
+                myAdapter.notifyDataSetChanged()
             }
 
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_LONG).show()
-                Log.d("DBERR", error.toString())
+            override fun onFailure(call: Call<List<CryptoData>>, t: Throwable) {
+                hideProgressBar()
+                Toast.makeText(applicationContext, "Check Your Internet Connection!", Toast.LENGTH_LONG).show()
+                Log.d("ListActivity", "onFailure:" + t.message)
             }
-
-
         })
+    }
+
+    private fun getMyData() {
+        val okhttpHttpLoggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+
+        val okHttpClient = OkHttpClient.Builder().addInterceptor(
+            okhttpHttpLoggingInterceptor
+        )
+
+        val retrofitBuilder = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(BASE_URL)
+            .client(okHttpClient.build())
+            .build()
+            .create(ApiInterface::class.java)
+
+        val retrofitData = retrofitBuilder.getCrypto(100, 1).enqueue(object :
+            Callback<List<CryptoData>> {
+            override fun onResponse(
+                call: Call<List<CryptoData>>,
+                response: Response<List<CryptoData>>
+            ) {
+                hideProgressBar()
+                myAdapter = CryptoListAdapter(baseContext, response.body()!!)
+                recyclerviewlist.adapter = myAdapter
+                myAdapter.notifyDataSetChanged()
+            }
+
+            override fun onFailure(call: Call<List<CryptoData>>, t: Throwable) {
+                hideProgressBar()
+                Toast.makeText(applicationContext, "Check Your Internet Connection!", Toast.LENGTH_LONG).show()
+                Log.d("ListActivity", "onFailure:" + t.message)
+            }
+        })
+    }
+
+    private fun hideProgressBar() {
+        cryptoLoader.visibility = View.GONE
     }
 
     private fun bottomBar() {

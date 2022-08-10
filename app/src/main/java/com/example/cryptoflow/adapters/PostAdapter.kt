@@ -56,7 +56,7 @@ class PostAdapter(private val mContext:Context, private  val mPost:List<Post>):R
 //        Picasso.get().load(post.getPostImage()).into(holder.postImage)
         holder.caption.text=post.getCaption()
         publisherInfo(holder.profileImage, holder.username, post.getPublisher())
-        isLiked(post.getPostId(), holder.likeButton, holder.postImage)
+        isLiked(post.getPostId(), holder.likeButton)
         getCountofLikes(post.getPostId(), holder.likes)
         getComments(post.getPostId(), holder.comments)
 
@@ -77,19 +77,6 @@ class PostAdapter(private val mContext:Context, private  val mPost:List<Post>):R
             mContext.startActivity(intent)
         }
 
-        holder.postImage.setOnClickListener {
-            if (holder.postImage.tag.toString() == "like") {
-                FirebaseDatabase.getInstance().reference.child("Likes").child(post.getPostId())
-                    .child(firebaseUser!!.uid)
-                    .setValue(true)
-            } else {
-                FirebaseDatabase.getInstance().reference.child("Likes").child(post.getPostId())
-                    .child(firebaseUser!!.uid)
-                    .removeValue()
-            }
-
-        }
-
         holder.likeButton.setOnClickListener{
             if (holder.likeButton.tag.toString()=="like")
             {
@@ -106,12 +93,12 @@ class PostAdapter(private val mContext:Context, private  val mPost:List<Post>):R
             }
         }
 
-        holder.comments.setOnClickListener {
-
-            val intent = Intent(mContext, AddCommentActivity::class.java).apply {
-                putExtra("POST_ID",postid)
-            }
-            mContext.startActivity(intent)
+        holder.comments.setOnClickListener { v ->
+            val context = v.context
+            val intent = Intent(context, AddCommentActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            intent.putExtra("POST_ID", postid)
+            context.startActivity(intent)
         }
 
         holder.likes.setOnClickListener {
@@ -121,12 +108,12 @@ class PostAdapter(private val mContext:Context, private  val mPost:List<Post>):R
             mContext.startActivity(intent)
         }
 
-        holder.commentButton.setOnClickListener {
-
-            val intent = Intent(mContext,AddCommentActivity::class.java).apply {
-                putExtra("POST_ID",postid)
-            }
-            mContext.startActivity(intent)
+        holder.commentButton.setOnClickListener { v ->
+            val context = v.context
+            val intent = Intent(context, AddCommentActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            intent.putExtra("POST_ID", postid)
+            context.startActivity(intent)
         }
 
     }
@@ -185,7 +172,7 @@ class PostAdapter(private val mContext:Context, private  val mPost:List<Post>):R
     }
 
 
-    private fun isLiked(postid:String,imageView: ImageView,postedImg:ImageView) {
+    private fun isLiked(postid:String,imageView: ImageView) {
 
         firebaseUser=FirebaseAuth.getInstance().currentUser
         val postRef=FirebaseDatabase.getInstance().reference.child("Likes").child(postid)
@@ -198,12 +185,10 @@ class PostAdapter(private val mContext:Context, private  val mPost:List<Post>):R
             override fun onDataChange(datasnapshot: DataSnapshot) {
                 if (datasnapshot.child(firebaseUser!!.uid).exists()) {
                     imageView.setImageResource(R.drawable.likedbutton)
-                    postedImg.tag =" liked"
                     imageView.tag = "liked"
                 }
                 else {
                     imageView.setImageResource(R.drawable.initialike)
-                    postedImg.tag = "like"
                     imageView.tag = "like"
                 }
             }
@@ -235,7 +220,7 @@ class PostAdapter(private val mContext:Context, private  val mPost:List<Post>):R
                 if(snapshot.exists())
                 {
                     val user = snapshot.getValue<User>(User::class.java)
-                    Picasso.with(profileImage.context).load(user!!.getImage()).placeholder(R.drawable.profile).into(profileImage)
+                    Picasso.with(profileImage.context).load(user!!.getImage()).placeholder(R.drawable.face).into(profileImage)
                     username.text =(user.getUsername())
 
                 }

@@ -8,6 +8,9 @@
         android:color="#0466C8"
         android:width="2dp"/>
 
-    <solid android:color="#FFFFFF" />
+    <solid android:color="#FFFFFF"
+        />
+    <padding
+        android:left="10dp"/>
 
 </shape>

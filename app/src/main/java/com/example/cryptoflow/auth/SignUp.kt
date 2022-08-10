@@ -1,8 +1,10 @@
 package com.example.cryptoflow.auth
 
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.Toast
 import com.example.cryptoflow.R
 import com.google.firebase.auth.FirebaseAuth
@@ -23,9 +25,9 @@ class SignUp : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
-        val fullName = usernamesignup.text.toString()
-        val userName = usernamesignup.text.toString()
-        signUpUser(fullName, userName)
+        signupbutton.setOnClickListener {
+            createAccount()
+        }
 
 
         redirectsignin.setOnClickListener {
@@ -34,67 +36,78 @@ class SignUp : AppCompatActivity() {
         }
     }
 
-    private fun signUpUser(fullName: String, userName: String) {
-        signupbutton.setOnClickListener {
-            val username = usernamesignup.text.toString()
-            val email = signupemail.text.toString()
-            val pass = passwordsignup.text.toString()
+    private fun createAccount() {
+        val fullName=signup_fullname.text.toString()
+        val userName=signup_username.text.toString()
+        val email=signup_email.text.toString()
+        val password=signup_password.text.toString()
 
-            if (username.isEmpty() || email.isEmpty() || pass.isEmpty()) {
-                usernamesignup.error = "Username is Required!"
-                signupemail.error = "Email is Required!"
-                passwordsignup.error = "Password is Required!"
-            } else {
 
-//                Authenticating user and saving their username to Firebase Database
+        when{
+            TextUtils.isEmpty(fullName)-> Toast.makeText(this, "Name is required", Toast.LENGTH_SHORT).show()
+            TextUtils.isEmpty(userName)-> Toast.makeText(this, "Username is required", Toast.LENGTH_SHORT).show()
+            TextUtils.isEmpty(email)-> Toast.makeText(this, "Email is required", Toast.LENGTH_SHORT).show()
+            TextUtils.isEmpty(password)-> Toast.makeText(this, "Password is required", Toast.LENGTH_SHORT).show()
 
-//    Get current user id
-    val currentUserId = FirebaseAuth.getInstance().currentUser!!.uid
-                val userMap = HashMap<String, Any>()
-                userMap["uid"] = currentUserId
-                userMap["fullname"] = fullName
-                userMap["username"] = userName.toLowerCase()
-                userMap["email"] = email
-                userMap["bio"] = "Hey! I am using CryptoView!"
-                userMap["image"] =
-                    "gs://instagram-clone-app-205f9.appspot.com/Default images/profile.png"
+            else->
+            {
 
-                mAuth.createUserWithEmailAndPassword(email, pass)
+                val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
+                mAuth.createUserWithEmailAndPassword(email,password)
                     .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            databaseReference.child("users")
-                                .addListenerForSingleValueEvent(object : ValueEventListener {
-                                    override fun onDataChange(snapshot: DataSnapshot) {
-                                        databaseReference.child("users")
-                                            .child(FirebaseAuth.getInstance().currentUser!!.uid)
-                                            .child("usernamesignup").setValue(username)
-                                        databaseReference.child("users")
-                                            .child(FirebaseAuth.getInstance().currentUser!!.uid)
-                                            .child("emailaddress").setValue(email)
-                                        databaseReference.child("Follow").child(currentUserId)
-                                            .child("Following").child(currentUserId)
-                                            .setValue(true)
-                                    }
-
-                                    override fun onCancelled(error: DatabaseError) {
-                                        TODO("Not yet implemented")
-                                    }
-                                })
-                            Toast.makeText(
-                                applicationContext,
-                                "User registered successfully",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            startActivity(Intent(applicationContext, SignIn::class.java))
-                        } else {
-                            Toast.makeText(
-                                applicationContext,
-                                "Registration Error: " + task.exception?.message.toString(),
-                                Toast.LENGTH_SHORT
-                            ).show()
+                        if(task.isSuccessful)
+                        {
+                            saveUserInfo(fullName,userName,email)
+                        }
+                        else
+                        {
+                            val message=task.exception!!.toString()
+                            Toast.makeText(this,"Error : $message", Toast.LENGTH_LONG).show()
+                            mAuth.signOut()
                         }
                     }
             }
         }
     }
+
+    private fun saveUserInfo(fullName: String, userName: String, email: String) {
+        val currentUserId=FirebaseAuth.getInstance().currentUser!!.uid
+        val userRef : DatabaseReference=FirebaseDatabase.getInstance().reference.child("Users")
+
+        val userMap=HashMap<String,Any>()
+        userMap["uid"]=currentUserId
+        userMap["fullname"]=fullName
+        userMap["username"]=userName.toLowerCase()
+        userMap["email"]=email
+        userMap["bio"]="Hey! I am using InstaApp"
+        userMap["image"]="gs://instagram-clone-app-205f9.appspot.com/Default images/profile.png"
+
+
+        userRef.child(currentUserId).setValue(userMap)
+            .addOnCompleteListener {task ->
+                if(task.isSuccessful)
+                {
+                    Toast.makeText(this,"Account has been created",Toast.LENGTH_SHORT).show()
+
+
+                    FirebaseDatabase.getInstance().reference
+                        .child("Follow").child(currentUserId)
+                        .child("Following").child(currentUserId)
+                        .setValue(true)
+
+
+                    val intent=Intent(this@SignUp,SignIn::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+                    finish()
+                }
+                else
+                {
+                    val message=task.exception!!.toString()
+                    Toast.makeText(this,"Error : $message", Toast.LENGTH_LONG).show()
+                    FirebaseAuth.getInstance().signOut()
+                }
+            }
+    }
+
 }

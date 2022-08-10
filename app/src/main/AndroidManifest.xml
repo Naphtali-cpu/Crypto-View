@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.cryptoflow">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -14,6 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CryptoFlow">
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+             android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"/>
         <activity
             android:name=".mainui.ShowUsersActivity"
             android:exported="false" />
@@ -23,9 +26,7 @@
         <activity
             android:name=".mainui.PostsActivity"
             android:exported="false" />
-        <activity
-            android:name=".mainui.MainActivity"
-            android:exported="false" />
+
         <activity
             android:name=".mainui.Networking"
             android:exported="false" />

@@ -8,16 +8,21 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoflow.R
 import com.example.cryptoflow.adapters.CryptoListAdapter
+import com.example.cryptoflow.adapters.PostAdapter
 import com.example.cryptoflow.api.ApiInterface
 import com.example.cryptoflow.data.CryptoData
+import com.example.cryptoflow.data.Post
 import com.example.cryptoflow.sessions.LoginPref
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_list.*
+import kotlinx.android.synthetic.main.activity_list.recycler_view_home
 import kotlinx.android.synthetic.main.activity_news.*
+import kotlinx.android.synthetic.main.activity_posts.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -27,13 +32,17 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-const val BASE_URL = "https://api.coingecko.com/api/v3/"
+const val HOME_URL = "https://api.coingecko.com/api/v3/"
 
 class ListActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
     lateinit var session: LoginPref
     lateinit var myAdapter: CryptoListAdapter
     lateinit var linearLayoutManager: LinearLayoutManager
+    private var recyclerView: RecyclerView? = null
+    private lateinit var dbref : DatabaseReference
+    private lateinit var userRecyclerview : RecyclerView
+    private lateinit var userArrayList : ArrayList<Post>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +52,63 @@ class ListActivity : AppCompatActivity() {
         userNameFirebase()
         bottomBar()
         redirectPostThoughts()
+        redirectProfile()
+        recyclerPostInilialise()
+        retrieveUserPosts()
+    }
+
+    private fun retrieveUserPosts() {
+        dbref = FirebaseDatabase.getInstance().getReference("Posts")
+
+        dbref.addValueEventListener(object : ValueEventListener {
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                if (snapshot.exists()){
+
+                    for (userSnapshot in snapshot.children){
+                        val user = userSnapshot.getValue(Post::class.java)
+                        userArrayList.add(user!!)
+                    }
+                    userRecyclerview.adapter = PostAdapter(baseContext, userArrayList)
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(applicationContext, error.toString(), Toast.LENGTH_LONG).show()
+                Log.d("DBERR", error.toString())
+            }
+
+
+        })
+    }
+
+    private fun recyclerPostInilialise() {
+        recycler_view_home.setHasFixedSize(true)
+        linearLayoutManager = LinearLayoutManager(this)
+        recycler_view_home.layoutManager = linearLayoutManager
+
+        recycler_view_home.addItemDecoration(
+            DividerItemDecoration(
+                baseContext,
+                linearLayoutManager.orientation
+            )
+        )
+
+        userRecyclerview = findViewById(R.id.recycler_view_home)
+        userRecyclerview.layoutManager = LinearLayoutManager(this)
+        userRecyclerview.setHasFixedSize(true)
+
+        userArrayList = arrayListOf<Post>()
+        recyclerView = findViewById(R.id.recycler_view_home)
+    }
+
+    private fun redirectProfile() {
+        homeProfile.setOnClickListener {
+            val intent = Intent(this, Profile::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun redirectPostThoughts() {
@@ -56,9 +122,9 @@ class ListActivity : AppCompatActivity() {
 
     private fun initRecycler() {
 
-        recyclerviewlist.setHasFixedSize(true)
+        homerecyclerviewlist.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
-        recyclerviewlist.layoutManager = linearLayoutManager
+        homerecyclerviewlist.layoutManager = linearLayoutManager
 
     }
 
@@ -95,8 +161,8 @@ class ListActivity : AppCompatActivity() {
     //        Get user's username from firebase database
     private fun userNameFirebase() {
 
-        database = FirebaseDatabase.getInstance().getReference("users")
-            .child(FirebaseAuth.getInstance().currentUser!!.uid).child("usernamesignup")
+        database = FirebaseDatabase.getInstance().getReference("Users")
+            .child(FirebaseAuth.getInstance().currentUser!!.uid).child("fullname")
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val value = snapshot.value.toString()
@@ -123,12 +189,12 @@ class ListActivity : AppCompatActivity() {
 
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BASE_URL)
+            .baseUrl(HOME_URL)
             .client(okHttpClient.build())
             .build()
             .create(ApiInterface::class.java)
 
-        val retrofitData = retrofitBuilder.getCrypto().enqueue(object :
+        val retrofitData = retrofitBuilder.getCrypto(2, 1).enqueue(object :
             Callback<List<CryptoData>> {
             override fun onResponse(
                 call: Call<List<CryptoData>>,
@@ -136,7 +202,7 @@ class ListActivity : AppCompatActivity() {
             ) {
                 hideProgressBar()
                 myAdapter = CryptoListAdapter(baseContext, response.body()!!)
-                recyclerviewlist.adapter = myAdapter
+                homerecyclerviewlist.adapter = myAdapter
                 myAdapter.notifyDataSetChanged()
             }
 

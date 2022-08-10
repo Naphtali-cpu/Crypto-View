@@ -1,5 +1,6 @@
 package com.example.cryptoflow.mainui
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,8 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContract
 import com.example.cryptoflow.R
 import com.example.cryptoflow.imglib.ImagePicker
 import com.example.cryptoflow.imglib.ImageResult
@@ -20,57 +23,54 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.StorageTask
 import com.google.firebase.storage.UploadTask
 import com.squareup.picasso.Picasso
+import com.theartofdev.edmodo.cropper.CropImage
 import kotlinx.android.synthetic.main.activity_list.*
 import kotlinx.android.synthetic.main.activity_networking.*
 
 class Networking : AppCompatActivity() {
 
-    private lateinit var imagePicker: ImagePicker
     private var imageUri: Uri? = null
     private var storagePostPictureRef: StorageReference? = null
     private  var myUrl=""
+
+    private val cropActivityResultContract = object : ActivityResultContract<Any?, Uri?>() {
+        override fun createIntent(context: Context, input: Any?): Intent {
+            return CropImage.activity()
+                .setAspectRatio(16, 10)
+                .getIntent(this@Networking)
+        }
+
+        override fun parseResult(resultCode: Int, intent: Intent?): Uri? {
+            return CropImage.getActivityResult(intent)?.uri
+        }
+
+    }
+
+    private lateinit var cropActivityResultLauncher: ActivityResultLauncher<Any?>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_networking)
         storagePostPictureRef = FirebaseStorage.getInstance().reference.child("Post Picture")
-        imagePicker = ImagePicker(this)
         redirectPostThoughts()
-        selectOptionGallery()
         setImageOnStorage()
         hideThoughtLoader()
+        cropActivityResultLauncher = registerForActivityResult(cropActivityResultContract) {
+            it?.let { uri ->
+                imageUri = uri
+                image_view.setImageURI(imageUri)
+            }
+        }
+
+        img_pick_btn.setOnClickListener {
+            cropActivityResultLauncher.launch(null)
+        }
     }
     private fun hideThoughtLoader() {
         postThoughtLoader.visibility = View.GONE
     }
 
-    private fun selectOptionGallery() {
-        img_pick_btn.setOnClickListener {
-            imagePicker.selectSource { imageResult ->
-                imageCallBack(
-                    imageResult
-                )
-            }
-        }
-    }
 
-    private fun imageCallBack(imageResult: ImageResult<Uri>) {
-        when (imageResult) {
-            is ImageResult.Success -> {
-                val uri = imageResult.value
-                getLargeBitMap(uri)
-            }
-            is ImageResult.Failure -> {
-                val errorString = imageResult.errorString
-                Toast.makeText(this@Networking, errorString, Toast.LENGTH_LONG).show()
-            }
-        }
-    }
-
-    private fun getLargeBitMap(uri: Uri) {
-        imageUri = uri
-        image_view.setImageURI(imageUri)
-    }
 
     private fun redirectPostThoughts() {
         backToHome.setOnClickListener {
