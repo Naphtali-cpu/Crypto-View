@@ -21,4 +21,6 @@ class CryptoGraphAdapter(private val graphicalData: ArrayList<GraphDataSubList>)
     }
 
 
+
+
 }

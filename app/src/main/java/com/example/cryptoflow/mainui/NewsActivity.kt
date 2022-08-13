@@ -39,8 +39,13 @@ class NewsActivity : AppCompatActivity() {
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.nav_news -> return@OnNavigationItemSelectedListener true
-                R.id.nav_settings -> {
-                    startActivity(Intent(applicationContext, SettingsActivity::class.java))
+                R.id.nav_network -> {
+                    startActivity(Intent(applicationContext, PostsActivity::class.java))
+                    overridePendingTransition(0, 0)
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.nav_profile -> {
+                    startActivity(Intent(applicationContext, Profile::class.java))
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }

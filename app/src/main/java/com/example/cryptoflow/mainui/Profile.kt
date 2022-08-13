@@ -1,11 +1,13 @@
 package com.example.cryptoflow.mainui
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.cryptoflow.R
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import kotlinx.android.synthetic.main.activity_networking.*
 import kotlinx.android.synthetic.main.activity_profile.*
 
 class Profile : AppCompatActivity() {
@@ -14,7 +16,7 @@ class Profile : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
 
         BottomSheetBehavior.from(sheet).apply {
-            peekHeight = 200
+            peekHeight = 600
             this.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
@@ -26,7 +28,31 @@ class Profile : AppCompatActivity() {
 
 
         }
+        settingsRedirect()
+        updateUserAccount()
+        privacyRedirectAccount()
 
 
+    }
+
+    private fun privacyRedirectAccount() {
+        privacyProfile.setOnClickListener {
+            val intent = Intent(this, Privacy::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun updateUserAccount() {
+        updateAccount.setOnClickListener {
+            val intent = Intent(this, UpdateAccount::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun settingsRedirect() {
+        settingsSection.setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

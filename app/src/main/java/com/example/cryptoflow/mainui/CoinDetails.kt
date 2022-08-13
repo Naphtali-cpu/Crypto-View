@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,7 @@ import com.example.cryptoflow.data.graphmodel.GraphDataSubList
 import com.google.gson.GsonBuilder
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_coin_details.*
+import kotlinx.android.synthetic.main.activity_list.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -41,7 +43,7 @@ class CoinDetails : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coin_details)
-        
+
 
         val id = intent.getStringExtra("id")
         val percent = intent.getStringExtra("percent")
@@ -55,7 +57,7 @@ class CoinDetails : AppCompatActivity() {
         val imageCoin: ImageView = findViewById(R.id.coin)
         getDetailData(id)
         plotGraphData(id)
-        
+
         textCoin.text = coinName
 
         if (percent != null) {
@@ -72,13 +74,13 @@ class CoinDetails : AppCompatActivity() {
 
         if (marketCap != null) {
             if (marketCap.length >= 15 || marketCap.length >= 14 || marketCap.length >= 13) {
-    //            Trillion
+                //            Trillion
                 markCap.text = "$ ${marketCap.slice(0..2)} Trillion"
             } else if (marketCap.length >= 12 || marketCap.length >= 11 || marketCap.length >= 10) {
-    //            Billion
+                //            Billion
                 markCap.text = "$ ${marketCap.slice(0..2)} Billion"
             } else if (marketCap.length >= 9 || marketCap.length >= 8 || marketCap.length >= 7) {
-    //            Million
+                //            Million
                 markCap.text = "$ ${marketCap.slice(0..2)} Million"
             } else {
                 Toast.makeText(applicationContext, "Something went wrong", Toast.LENGTH_LONG).show()
@@ -89,13 +91,13 @@ class CoinDetails : AppCompatActivity() {
 
         if (totalVolume != null) {
             if (totalVolume.length >= 15 || totalVolume.length >= 14 || totalVolume.length >= 13) {
-    //            Trillion
+                //            Trillion
                 totalVol.text = "$ ${totalVolume.slice(0..2)} Trillion"
             } else if (totalVolume.length >= 12 || totalVolume.length >= 11 || totalVolume.length >= 10) {
-    //            Billion
+                //            Billion
                 totalVol.text = "$ ${totalVolume.slice(0..2)} Billion"
             } else if (totalVolume.length >= 9 || totalVolume.length >= 8 || totalVolume.length >= 7) {
-    //            Million
+                //            Million
                 totalVol.text = "$ ${totalVolume.slice(0..2)} Million"
             } else {
                 Toast.makeText(applicationContext, "Something went wrong", Toast.LENGTH_LONG).show()
@@ -110,6 +112,13 @@ class CoinDetails : AppCompatActivity() {
             val intent = Intent(this, ListActivity::class.java)
             startActivity(intent)
         }
+        rbPeriod1D.setOnClickListener {
+            plotGraphData(id)
+        }
+        oneWeekData(id)
+        oneMonthData(id)
+        threeMonthData(id)
+        oneYearData(id)
 
     }
 
@@ -121,30 +130,197 @@ class CoinDetails : AppCompatActivity() {
             .build()
         val covidService = retrofit.create(ApiInterface::class.java)
 
-        covidService.getGraphData(id.toString()).enqueue(object : Callback<ArrayList<GraphDataSubList>> {
-            override fun onResponse(
-                call: Call<ArrayList<GraphDataSubList>>,
-                response: Response<ArrayList<GraphDataSubList>>
-            ) {
-                Log.i("TAG", "onResponse $response")
-                val nationalData = response.body()
-                if (nationalData == null) {
-                    Log.w("TAGTEST", "Did not receive a valid response body")
-                    return
+        covidService.getGraphData(id.toString(), 1)
+            .enqueue(object : Callback<ArrayList<GraphDataSubList>> {
+                override fun onResponse(
+                    call: Call<ArrayList<GraphDataSubList>>,
+                    response: Response<ArrayList<GraphDataSubList>>
+                ) {
+                    Log.i("TAG", "onResponse $response")
+                    val nationalData = response.body()
+                    if (nationalData == null) {
+                        Log.w("TAGTEST", "Did not receive a valid response body")
+                        return
+                    }
+                    setupEventListeners()
+                    hideProgressBar()
+                    newgraphdata = nationalData.reversed() as ArrayList<GraphDataSubList>
+                    Log.i("TAG", "Update graph with national data")
+                    updateDisplayWithData(newgraphdata)
+//                addChartScrubListener()
                 }
-                setupEventListeners()
 
-                newgraphdata = nationalData.reversed() as ArrayList<GraphDataSubList>
-                Log.i("TAG", "Update graph with national data")
-                updateDisplayWithData(newgraphdata)
-            }
+                override fun onFailure(call: Call<ArrayList<GraphDataSubList>>, t: Throwable) {
+                    Log.e("TAG", "onFailure $t")
+                    hideProgressBar()
+                }
 
-            override fun onFailure(call: Call<ArrayList<GraphDataSubList>>, t: Throwable) {
-                Log.e("TAG", "onFailure $t")
-            }
-
-        })
+            })
     }
+
+//    Graph Data for one week
+
+    private fun oneWeekData(id: String?) {
+        rbPeriod1W.setOnClickListener {
+            val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
+            val retrofit = Retrofit.Builder()
+                .baseUrl(BASEGRAPH_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build()
+            val covidService = retrofit.create(ApiInterface::class.java)
+
+            covidService.getGraphData(id.toString(), 7)
+                .enqueue(object : Callback<ArrayList<GraphDataSubList>> {
+                    override fun onResponse(
+                        call: Call<ArrayList<GraphDataSubList>>,
+                        response: Response<ArrayList<GraphDataSubList>>
+                    ) {
+                        Log.i("TAG", "onResponse $response")
+                        val nationalData = response.body()
+                        if (nationalData == null) {
+                            Log.w("TAGTEST", "Did not receive a valid response body")
+                            return
+                        }
+                        setupEventListeners()
+                        hideProgressBar()
+                        newgraphdata = nationalData.reversed() as ArrayList<GraphDataSubList>
+                        Log.i("TAG", "Update graph with national data")
+                        updateDisplayWithData(newgraphdata)
+//                addChartScrubListener()
+                    }
+
+                    override fun onFailure(call: Call<ArrayList<GraphDataSubList>>, t: Throwable) {
+                        Log.e("TAG", "onFailure $t")
+                    }
+
+                })
+        }
+    }
+
+    //    One Month Data
+
+    private fun oneMonthData(id: String?) {
+
+        rbPeriod1M.setOnClickListener {
+            val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
+            val retrofit = Retrofit.Builder()
+                .baseUrl(BASEGRAPH_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build()
+            val covidService = retrofit.create(ApiInterface::class.java)
+
+            covidService.getGraphData(id.toString(), 30)
+                .enqueue(object : Callback<ArrayList<GraphDataSubList>> {
+                    override fun onResponse(
+                        call: Call<ArrayList<GraphDataSubList>>,
+                        response: Response<ArrayList<GraphDataSubList>>
+                    ) {
+                        Log.i("TAG", "onResponse $response")
+                        val nationalData = response.body()
+                        if (nationalData == null) {
+                            Log.w("TAGTEST", "Did not receive a valid response body")
+                            return
+                        }
+                        setupEventListeners()
+                        hideProgressBar()
+                        newgraphdata = nationalData.reversed() as ArrayList<GraphDataSubList>
+                        Log.i("TAG", "Update graph with national data")
+                        updateDisplayWithData(newgraphdata)
+//                addChartScrubListener()
+                    }
+
+                    override fun onFailure(call: Call<ArrayList<GraphDataSubList>>, t: Throwable) {
+                        Log.e("TAG", "onFailure $t")
+                    }
+
+                })
+        }
+
+    }
+
+    //    Three Month Data
+
+    private fun threeMonthData(id: String?) {
+
+        rbPeriod3M.setOnClickListener {
+            val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
+            val retrofit = Retrofit.Builder()
+                .baseUrl(BASEGRAPH_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build()
+            val covidService = retrofit.create(ApiInterface::class.java)
+
+            covidService.getGraphData(id.toString(), 90)
+                .enqueue(object : Callback<ArrayList<GraphDataSubList>> {
+                    override fun onResponse(
+                        call: Call<ArrayList<GraphDataSubList>>,
+                        response: Response<ArrayList<GraphDataSubList>>
+                    ) {
+                        Log.i("TAG", "onResponse $response")
+                        val nationalData = response.body()
+                        if (nationalData == null) {
+                            Log.w("TAGTEST", "Did not receive a valid response body")
+                            return
+                        }
+                        setupEventListeners()
+                        hideProgressBar()
+                        newgraphdata = nationalData.reversed() as ArrayList<GraphDataSubList>
+                        Log.i("TAG", "Update graph with national data")
+                        updateDisplayWithData(newgraphdata)
+//                addChartScrubListener()
+                    }
+
+                    override fun onFailure(call: Call<ArrayList<GraphDataSubList>>, t: Throwable) {
+                        Log.e("TAG", "onFailure $t")
+                    }
+
+                })
+        }
+
+    }
+
+    //    One Year Graph Data
+
+    private fun oneYearData(id: String?) {
+        rbPeriod1Y.setOnClickListener {
+            val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
+            val retrofit = Retrofit.Builder()
+                .baseUrl(BASEGRAPH_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build()
+            val covidService = retrofit.create(ApiInterface::class.java)
+
+            covidService.getGraphData(id.toString(), 365)
+                .enqueue(object : Callback<ArrayList<GraphDataSubList>> {
+                    override fun onResponse(
+                        call: Call<ArrayList<GraphDataSubList>>,
+                        response: Response<ArrayList<GraphDataSubList>>
+                    ) {
+                        Log.i("TAG", "onResponse $response")
+                        val nationalData = response.body()
+                        if (nationalData == null) {
+                            Log.w("TAGTEST", "Did not receive a valid response body")
+                            return
+                        }
+                        setupEventListeners()
+                        hideProgressBar()
+                        newgraphdata = nationalData.reversed() as ArrayList<GraphDataSubList>
+                        Log.i("TAG", "Update graph with national data")
+                        updateDisplayWithData(newgraphdata)
+//                addChartScrubListener()
+                    }
+
+                    override fun onFailure(call: Call<ArrayList<GraphDataSubList>>, t: Throwable) {
+                        Log.e("TAG", "onFailure $t")
+                    }
+
+                })
+        }
+    }
+
+//    private fun addChartScrubListener() {
+//        TODO("Not yet implemented")
+//    }
 
     private fun getDetailData(id: String?) {
         val okhttpHttpLoggingInterceptor = HttpLoggingInterceptor().apply {
@@ -180,7 +356,11 @@ class CoinDetails : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<TestDetailData>, t: Throwable) {
-                Toast.makeText(applicationContext, "Something went wrong on our side", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    applicationContext,
+                    "Something went wrong on our side",
+                    Toast.LENGTH_LONG
+                ).show()
                 Log.d("ListActivity", "onFailure:" + t.message)
             }
         })
@@ -193,6 +373,9 @@ class CoinDetails : AppCompatActivity() {
 
     private fun setupEventListeners() {
         stockChartData.isScrubEnabled = true
+    }
+    private fun hideProgressBar() {
+        graphLoader.visibility = View.GONE
     }
 
 }

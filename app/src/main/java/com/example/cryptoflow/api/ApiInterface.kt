@@ -19,23 +19,13 @@ interface ApiInterface {
         @Query("page") page: Int
     ): Call<List<CryptoData>>
 
-//    @Headers(API_KEY)
-//    @GET("{period}")
-//    suspend fun getCryptoGraph(
-//        @Path("period") period: String,
-//        @Query("fsym") fromCurrencySymbol: String?,
-//        @Query("tsym") toCurrencySymbol: String?,
-//        @Query("limit") limit: Int,
-//        @Query("aggregate") aggregate: Int,
-//        @Query("extraParams") apiKey: String = APP_NAME
-//    ): GraphData
-
     @GET("coins/{id}")
     fun getCurrentData(@Path("id") id: String) : Call<TestDetailData>
 
-    @GET("coins/{id}/ohlc?vs_currency=usd&days=1")
+    @GET("coins/{id}/ohlc?vs_currency=usd")
     fun getGraphData(
-        @Path("id") id: String
+        @Path("id") id: String,
+        @Query("days") days: Int
     ): Call<ArrayList<GraphDataSubList>>
 
 

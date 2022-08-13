@@ -60,7 +60,7 @@
     <FrameLayout
         android:id="@+id/sheet"
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="600dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -154,7 +154,7 @@
                     android:layout_marginStart="16dp"
                     android:fontFamily="@font/poppins_medium"
                     android:text="Personal Information"
-                    android:textColor="#FFF"
+                    android:textColor="#CACACA"
                     android:textSize="15dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/circleImageView"
@@ -191,7 +191,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <ImageView
                     android:id="@+id/updateAcc"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
@@ -208,7 +208,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="16dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Personal Information"
+                    android:text="Change Username"
                     android:textColor="#FFF"
                     android:textSize="15dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -224,6 +224,101 @@
                     android:src="@drawable/round_arrow"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="340dp"
+            app:dividerInsetStart="90dp"
+            app:dividerColor="#FFF"
+            />
+
+        <LinearLayout
+            android:id="@+id/settingsSection"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="350dp">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/settImg"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="28dp"
+                    android:src="@drawable/setting_prof"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.533" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="App Settings"
+                    android:textColor="#FFF"
+                    android:textSize="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/settImg"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.509" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/round_arrow"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/logOut"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="490dp">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/logOutImg"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="28dp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_rawRes="@raw/logout"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.533" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Log Out"
+                    android:textColor="#FFF"
+                    android:textSize="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/logOutImg"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.509" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

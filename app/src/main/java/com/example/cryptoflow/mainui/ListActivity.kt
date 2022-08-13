@@ -52,9 +52,16 @@ class ListActivity : AppCompatActivity() {
         userNameFirebase()
         bottomBar()
         redirectPostThoughts()
-        redirectProfile()
         recyclerPostInilialise()
         retrieveUserPosts()
+        redirectNotif()
+    }
+
+    private fun redirectNotif() {
+        notifIcon.setOnClickListener {
+            val intent = Intent(this, Notifications::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun retrieveUserPosts() {
@@ -104,12 +111,6 @@ class ListActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recycler_view_home)
     }
 
-    private fun redirectProfile() {
-        homeProfile.setOnClickListener {
-            val intent = Intent(this, Profile::class.java)
-            startActivity(intent)
-        }
-    }
 
     private fun redirectPostThoughts() {
         link_to_post.setOnClickListener {
@@ -142,13 +143,13 @@ class ListActivity : AppCompatActivity() {
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.nav_home -> return@OnNavigationItemSelectedListener true
-                R.id.nav_settings -> {
-                    startActivity(Intent(applicationContext, SettingsActivity::class.java))
+                R.id.nav_network -> {
+                    startActivity(Intent(applicationContext, PostsActivity::class.java))
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }
-                R.id.nav_network -> {
-                    startActivity(Intent(applicationContext, PostsActivity::class.java))
+                R.id.nav_profile -> {
+                    startActivity(Intent(applicationContext, Profile::class.java))
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }

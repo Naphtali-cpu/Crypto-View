@@ -138,13 +138,13 @@ class PostsActivity : AppCompatActivity() {
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.nav_network -> return@OnNavigationItemSelectedListener true
-                R.id.nav_settings -> {
-                    startActivity(Intent(applicationContext, SettingsActivity::class.java))
+                R.id.nav_home -> {
+                    startActivity(Intent(applicationContext, ListActivity::class.java))
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }
-                R.id.nav_home -> {
-                    startActivity(Intent(applicationContext, ListActivity::class.java))
+                R.id.nav_profile -> {
+                    startActivity(Intent(applicationContext, Profile::class.java))
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }

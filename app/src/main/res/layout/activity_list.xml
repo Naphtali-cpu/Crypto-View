@@ -9,17 +9,7 @@
     tools:context=".mainui.ListActivity"
     tools:ignore="HardcodedText">
 
-    <com.tuyenmonkey.mkloader.MKLoader
-        android:id="@+id/newLoader"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="300dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/scrollView3"
-        app:mk_color="#0466C8"
-        app:mk_type="Worm" />
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/link_to_post"
@@ -52,6 +42,28 @@
             android:background="?attr/background_color"
             tools:ignore="HardcodedText">
 
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/notifIcon"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_rawRes="@raw/notif" />
+
+            <com.tuyenmonkey.mkloader.MKLoader
+                android:id="@+id/newLoader"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:mk_color="#0466C8"
+                app:mk_type="Worm" />
+
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
@@ -61,47 +73,51 @@
                 android:padding="20dp"
                 android:text="Hello, "
                 android:textColor="?attr/text_color"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/homeProfile"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_centerHorizontal="true"
-                android:padding="10dp"
-                android:src="@drawable/face"
-                app:civ_border_color="#FFF"
-                app:civ_border_width="3dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="MissingConstraints" />
 
 
             <TextView
                 android:id="@+id/userhomename"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="40dp"
+                android:layout_marginVertical="30dp"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:padding="20dp"
                 android:text="Naphtali Makori "
                 android:textColor="?attr/text_color"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="@+id/textView"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/helpTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="65dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:padding="20dp"
+                android:text="Let's help you with crypto updates "
+                android:textColor="?attr/text_color"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@+id/textView"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/materialDivider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
                 app:dividerColor="#D1D1D1"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/userhomename" />
 

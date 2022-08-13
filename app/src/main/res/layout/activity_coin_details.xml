@@ -7,6 +7,7 @@
     android:background="#EBF3FB"
     tools:context=".mainui.CoinDetails">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,6 +24,19 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintVertical_bias="0.0">
+
+            <com.tuyenmonkey.mkloader.MKLoader
+                android:id="@+id/graphLoader"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.589"
+                app:mk_color="#0466C8"
+                app:mk_type="Worm" />
 
             <ImageView
                 android:id="@+id/coin"
@@ -101,12 +115,100 @@
 
             </androidx.cardview.widget.CardView>
 
+            <RadioGroup
+                android:id="@+id/rgPeriodSelector"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="-20dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardChartData">
+
+                <RadioButton
+                    android:id="@+id/rbPeriod1D"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selected_radio"
+                    android:button="@null"
+                    android:checked="true"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="1d"
+                    android:textColor="#fff"
+                    android:textSize="14sp" />
+
+                <RadioButton
+                    android:id="@+id/rbPeriod1W"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selected_radio"
+                    android:button="@null"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="1w"
+                    android:textColor="#FFF"
+                    android:textSize="14sp" />
+
+                <RadioButton
+                    android:id="@+id/rbPeriod1M"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selected_radio"
+                    android:button="@null"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="1m"
+                    android:textColor="#fff"
+                    android:textSize="14sp" />
+
+                <RadioButton
+                    android:id="@+id/rbPeriod3M"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selected_radio"
+                    android:button="@null"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="3m"
+                    android:textColor="#fff"
+                    android:textSize="14sp" />
+
+
+                <RadioButton
+                    android:id="@+id/rbPeriod1Y"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selected_radio"
+                    android:button="@null"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="1y"
+                    android:textColor="#fff"
+                    android:textSize="14sp" />
+
+
+            </RadioGroup>
+
             <TextView
                 android:id="@+id/pestnamedetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="140dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Market Stats"
                 android:textColor="#050A1A"
@@ -190,7 +292,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="103dp"
+                android:layout_marginTop="180dp"
                 android:layout_marginEnd="4dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text=" hshtydt "
@@ -294,13 +396,16 @@
             android:src="@drawable/backto" />
 
         <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/afterChips"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="450dp" />
+            android:layout_marginTop="520dp"
+            app:dividerColor="#D1D1D1" />
 
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="670dp" />
+            android:layout_marginTop="750dp"
+            app:dividerColor="#D1D1D1" />
     </RelativeLayout>
 </ScrollView>

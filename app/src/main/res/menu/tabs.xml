@@ -15,10 +15,6 @@
         android:icon="@drawable/news"
         android:title= "Feed" />
 
-    <item
-        android:id="@+id/nav_settings"
-        android:icon="@drawable/newset"
-        android:title="Settings" />
 
     <item
         android:id="@+id/nav_profile"
