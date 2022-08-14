@@ -20,7 +20,7 @@
         <entry key="app/src/main/res/layout/activity_app_info.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_coin_details.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_crypto_details.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_list.xml" value="0.21" />
+        <entry key="app/src/main/res/layout/activity_list.xml" value="0.2698300283286119" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.30885416666666665" />
         <entry key="app/src/main/res/layout/activity_networking.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_news.xml" value="0.22" />
@@ -41,6 +41,7 @@
         <entry key="app/src/main/res/layout/newslist.xml" value="0.25" />
         <entry key="app/src/main/res/layout/notification_layout.xml" value="0.22" />
         <entry key="app/src/main/res/layout/posts_layout.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/watchlist_placeholder.xml" value="0.2" />
         <entry key="app/src/main/res/menu/item_menu.xml" value="0.33" />
         <entry key="app/src/main/res/menu/tabs.xml" value="0.1" />
       </map>
