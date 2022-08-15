@@ -13,14 +13,18 @@ interface ApiInterface {
 
 //    Get the first two coins
 
-    @GET("coins/markets?vs_currency=usd&order=market_cap_desc")
+    @GET("coins/markets?vs_currency=usd")
     fun getCrypto(
         @Query("per_page") per_page: Int,
-        @Query("page") page: Int
+        @Query("page") page: Int,
+        @Query("order") order: String
     ): Call<List<CryptoData>>
 
+
     @GET("coins/{id}")
-    fun getCurrentData(@Path("id") id: String) : Call<TestDetailData>
+    fun getCurrentData(
+        @Path("id") id: String
+    ) : Call<TestDetailData>
 
     @GET("coins/{id}/ohlc?vs_currency=usd")
     fun getGraphData(

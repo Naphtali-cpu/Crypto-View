@@ -6,7 +6,7 @@ data class CryptoData(
     val name: String,
     val image: String,
     val current_price: Double,
-    val price_change_percentage_24h: String,
+    val price_change_percentage_24h: Double,
     val market_cap: String,
     val last_updated: String,
     val total_supply: String,

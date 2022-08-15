@@ -195,7 +195,7 @@ class ListActivity : AppCompatActivity() {
             .build()
             .create(ApiInterface::class.java)
 
-        val retrofitData = retrofitBuilder.getCrypto(2, 1).enqueue(object :
+        val retrofitData = retrofitBuilder.getCrypto(2, 1, "market_cap_desc").enqueue(object :
             Callback<List<CryptoData>> {
             override fun onResponse(
                 call: Call<List<CryptoData>>,

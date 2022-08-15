@@ -10,11 +10,13 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoflow.R
+import com.example.cryptoflow.adapters.CryptoGraphAdapter
 import com.example.cryptoflow.adapters.CryptoListAdapter
 import com.example.cryptoflow.adapters.PostAdapter
 import com.example.cryptoflow.api.ApiInterface
 import com.example.cryptoflow.data.CryptoData
 import com.example.cryptoflow.data.Post
+import com.example.cryptoflow.data.graphmodel.GraphDataSubList
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_posts.*
@@ -27,11 +29,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_URL = "https://api.coingecko.com/api/v3/"
+
 class PostsActivity : AppCompatActivity() {
 
     private lateinit var database: DatabaseReference
     lateinit var myAdapter: CryptoListAdapter
     lateinit var linearLayoutManager: LinearLayoutManager
+
 
     var list: MutableList<CryptoData> = mutableListOf()
     var visibleItemCount: Int = 0
@@ -46,52 +50,88 @@ class PostsActivity : AppCompatActivity() {
         recyclerviewlist.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
         recyclerviewlist.layoutManager = linearLayoutManager
-//        markets.setOnClickListener {
-//            getMyData(pageId)
-//        }
+
         getMyData(pageId)
         bottomBar()
-//        page2.setOnClickListener {
-//            loadPage2()
-//        }
+        mrktCapAsc.setOnClickListener {
+            loadPage2()
+        }
+        markets.setOnClickListener {
+            reloadData()
+        }
 
     }
 
-//    private fun loadPage2() {
-//        val okhttpHttpLoggingInterceptor = HttpLoggingInterceptor().apply {
-//            level = HttpLoggingInterceptor.Level.BODY
-//        }
-//
-//        val okHttpClient = OkHttpClient.Builder().addInterceptor(
-//            okhttpHttpLoggingInterceptor
-//        )
-//
-//        val retrofitBuilder = Retrofit.Builder()
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .baseUrl(BASE_URL)
-//            .client(okHttpClient.build())
-//            .build()
-//            .create(ApiInterface::class.java)
-//
-//        val retrofitData = retrofitBuilder.getCrypto(100, pageId).enqueue(object :
-//            Callback<List<CryptoData>> {
-//            override fun onResponse(
-//                call: Call<List<CryptoData>>,
-//                response: Response<List<CryptoData>>
-//            ) {
-//                hideProgressBar()
-//                myAdapter = CryptoListAdapter(baseContext, response.body()!!)
-//                recyclerviewlist.adapter = myAdapter
-//                myAdapter.notifyDataSetChanged()
-//            }
-//
-//            override fun onFailure(call: Call<List<CryptoData>>, t: Throwable) {
-//                hideProgressBar()
-//                Toast.makeText(applicationContext, "Check Your Internet Connection!", Toast.LENGTH_LONG).show()
-//                Log.d("ListActivity", "onFailure:" + t.message)
-//            }
-//        })
-//    }
+    private fun loadPage2() {
+        val okhttpHttpLoggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+
+        val okHttpClient = OkHttpClient.Builder().addInterceptor(
+            okhttpHttpLoggingInterceptor
+        )
+
+        val retrofitBuilder = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(BASE_URL)
+            .client(okHttpClient.build())
+            .build()
+            .create(ApiInterface::class.java)
+
+        val retrofitData = retrofitBuilder.getCrypto(100, 1, "market_cap_asc").enqueue(object :
+            Callback<List<CryptoData>> {
+            override fun onResponse(
+                call: Call<List<CryptoData>>,
+                response: Response<List<CryptoData>>
+            ) {
+                myAdapter = CryptoListAdapter(baseContext, response.body()!!)
+                recyclerviewlist.adapter = myAdapter
+                myAdapter.notifyDataSetChanged()
+            }
+
+            override fun onFailure(call: Call<List<CryptoData>>, t: Throwable) {
+
+                Toast.makeText(applicationContext, "Check Your Internet Connection!", Toast.LENGTH_LONG).show()
+                Log.d("ListActivity", "onFailure:" + t.message)
+            }
+        })
+    }
+
+    private fun reloadData() {
+        val okhttpHttpLoggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+
+        val okHttpClient = OkHttpClient.Builder().addInterceptor(
+            okhttpHttpLoggingInterceptor
+        )
+
+        val retrofitBuilder = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(BASE_URL)
+            .client(okHttpClient.build())
+            .build()
+            .create(ApiInterface::class.java)
+
+        val retrofitData = retrofitBuilder.getCrypto(100, 1, "market_cap_desc").enqueue(object :
+            Callback<List<CryptoData>> {
+            override fun onResponse(
+                call: Call<List<CryptoData>>,
+                response: Response<List<CryptoData>>
+            ) {
+                myAdapter = CryptoListAdapter(baseContext, response.body()!!)
+                recyclerviewlist.adapter = myAdapter
+                myAdapter.notifyDataSetChanged()
+            }
+
+            override fun onFailure(call: Call<List<CryptoData>>, t: Throwable) {
+
+                Toast.makeText(applicationContext, "Check Your Internet Connection!", Toast.LENGTH_LONG).show()
+                Log.d("ListActivity", "onFailure:" + t.message)
+            }
+        })
+    }
+
 
     private fun getMyData(pageId: Int) {
         val okhttpHttpLoggingInterceptor = HttpLoggingInterceptor().apply {
@@ -109,21 +149,20 @@ class PostsActivity : AppCompatActivity() {
             .build()
             .create(ApiInterface::class.java)
 
-        val retrofitData = retrofitBuilder.getCrypto(100, pageId).enqueue(object :
+        val retrofitData = retrofitBuilder.getCrypto(100, pageId, "market_cap_desc").enqueue(object :
             Callback<List<CryptoData>> {
             override fun onResponse(
                 call: Call<List<CryptoData>>,
                 response: Response<List<CryptoData>>
             ) {
-                hideProgressBar()
+                hideShimmerEffect()
                 loading = true
                 recyclerviewlist.visibility = View.VISIBLE
                 setUpAdapter(response.body())
             }
 
             override fun onFailure(call: Call<List<CryptoData>>, t: Throwable) {
-                hideProgressBar()
-                Toast.makeText(applicationContext, "Check Your Internet Connection!", Toast.LENGTH_LONG).show()
+                hideShimmerEffect()
                 Log.d("ListActivity", "onFailure:" + t.message)
             }
         })
@@ -135,34 +174,37 @@ class PostsActivity : AppCompatActivity() {
             myAdapter = CryptoListAdapter(baseContext, list)
             recyclerviewlist.adapter = myAdapter
         } else {
-            var currentPosition = (recyclerviewlist.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+            var currentPosition =
+                (recyclerviewlist.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
             list.addAll(body!!)
             myAdapter.notifyDataSetChanged()
             recyclerviewlist.scrollToPosition(currentPosition)
         }
         recyclerviewlist.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-               if (dy > 0) {
-                   visibleItemCount = linearLayoutManager.childCount
-                   totalItemCount = linearLayoutManager.itemCount
-                   pastVisibleItemCount = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-                   if (loading) {
-                       if ((visibleItemCount + pastVisibleItemCount) >= totalItemCount) {
-                           loading = false
-                           pageId++
-                           getMyData(pageId)
-                       }
-                   }
-               }
+                if (dy > 0) {
+                    visibleItemCount = linearLayoutManager.childCount
+                    totalItemCount = linearLayoutManager.itemCount
+                    pastVisibleItemCount =
+                        (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                    if (loading) {
+                        if ((visibleItemCount + pastVisibleItemCount) >= totalItemCount) {
+                            loading = false
+                            pageId++
+                            getMyData(pageId)
+                        }
+                    }
+                }
             }
 
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+
                 super.onScrollStateChanged(recyclerView, newState)
             }
         })
     }
 
-    private fun hideProgressBar() {
+    private fun hideShimmerEffect() {
         cryptoListShimmer.visibility = View.GONE
     }
 

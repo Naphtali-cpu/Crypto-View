@@ -20,7 +20,4 @@ class CryptoGraphAdapter(private val graphicalData: ArrayList<GraphDataSubList>)
         return graphicalData[index][4].toFloat()
     }
 
-
-
-
 }

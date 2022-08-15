@@ -109,7 +109,7 @@ class CoinDetails : AppCompatActivity() {
         Picasso.with(this).load(coinLogo).into(imageCoin)
 
         back.setOnClickListener {
-            val intent = Intent(this, ListActivity::class.java)
+            val intent = Intent(this, PostsActivity::class.java)
             startActivity(intent)
         }
         rbPeriod1D.setOnClickListener {

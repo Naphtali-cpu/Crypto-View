@@ -17,13 +17,14 @@ import com.example.cryptoflow.R
 import com.example.cryptoflow.data.CryptoData
 import com.example.cryptoflow.data.Tickers
 import com.example.cryptoflow.mainui.CoinDetails
+import com.robinhood.spark.SparkAdapter
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.cryptolist.view.*
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class CryptoListAdapter(val context: Context, var userList: List<CryptoData>) : RecyclerView.Adapter<CryptoListAdapter.CryptoViewHolder>(), Filterable{
+class CryptoListAdapter(val context: Context, var userList: List<CryptoData>) : RecyclerView.Adapter<CryptoListAdapter.CryptoViewHolder>(), Filterable {
 
     inner class CryptoViewHolder(view : View) : RecyclerView.ViewHolder(view){
         var cryptoName: TextView
@@ -63,12 +64,12 @@ class CryptoListAdapter(val context: Context, var userList: List<CryptoData>) : 
 
 //        If number is negative logic changing the color
 
-        if (userList[position].price_change_percentage_24h >= 0.toString()) {
+        if (0.toString() <= userList[position].price_change_percentage_24h.toString()) {
             holder.pricePercent.setTextColor(context.resources.getColor(R.color.green))
-            holder.pricePercent.text = userList[position].price_change_percentage_24h + "%"
+            holder.pricePercent.text = "${userList[position].price_change_percentage_24h} %"
         } else {
             holder.pricePercent.setTextColor(context.resources.getColor(R.color.red))
-            holder.pricePercent.text = userList[position].price_change_percentage_24h + "%"
+            holder.pricePercent.text = "${userList[position].price_change_percentage_24h} %"
         }
 //        Pass data to the next activity and redirection
 
