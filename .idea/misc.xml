@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/back_placeholder.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/camera_opt.xml" value="0.1445" />
         <entry key="app/src/main/res/drawable/gradient_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_gallery.xml" value="0.1445" />
@@ -17,11 +18,11 @@
         <entry key="app/src/main/res/font/poppins_light.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_2.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_add_comment.xml" value="0.16" />
-        <entry key="app/src/main/res/layout/activity_app_info.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_app_info.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_app_info2.xml" value="0.18177083333333333" />
         <entry key="app/src/main/res/layout/activity_coin_details.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_crypto_details.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_list.xml" value="0.2698300283286119" />
+        <entry key="app/src/main/res/layout/activity_list.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.30885416666666665" />
         <entry key="app/src/main/res/layout/activity_networking.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_news.xml" value="0.22" />
@@ -29,18 +30,19 @@
         <entry key="app/src/main/res/layout/activity_notifications.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_posts.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_privacy.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.1984375" />
-        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_update_account.xml" value="0.25" />
         <entry key="app/src/main/res/layout/chooser_dialog.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/comment_item_layout.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/comment_item_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/cryptolist.xml" value="0.2" />
         <entry key="app/src/main/res/layout/homenews.xml" value="0.18" />
         <entry key="app/src/main/res/layout/newslist.xml" value="0.25" />
         <entry key="app/src/main/res/layout/notification_layout.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/post_placeholder.xml" value="0.1984375" />
         <entry key="app/src/main/res/layout/posts_layout.xml" value="0.22" />
         <entry key="app/src/main/res/layout/watchlist_placeholder.xml" value="0.2" />
         <entry key="app/src/main/res/menu/item_menu.xml" value="0.33" />

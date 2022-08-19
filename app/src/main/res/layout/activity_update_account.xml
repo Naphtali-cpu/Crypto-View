@@ -14,7 +14,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/poppins_semibold"
-        android:text="Change Username"
+        android:text="Update Profile"
         android:textColor="#050A1A"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,19 +25,47 @@
         app:layout_constraintVertical_bias="0.0" />
 
 
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/updateProfImg"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:padding="10dp"
+        android:src="@drawable/face"
+        app:civ_border_color="#FFF"
+        app:civ_border_width="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <TextView
+        android:id="@+id/changeImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Change Profile Image"
+        android:textColor="#0466C8"
+        app:layout_constraintEnd_toEndOf="@+id/updateProfImg"
+        app:layout_constraintStart_toStartOf="@+id/updateProfImg"
+        app:layout_constraintTop_toBottomOf="@+id/updateProfImg" />
+
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout5"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
         android:padding="10dp"
+        android:textColor="#000"
         app:boxStrokeColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/updatebutton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
-        app:layout_constraintVertical_bias="0.606">
+        app:layout_constraintTop_toBottomOf="@+id/changeImg">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/prefUsername"
@@ -47,7 +75,8 @@
             android:hint="Prefered Username "
             android:inputType="text"
             android:maxLength="30"
-            android:textColorHint="#535353"
+            android:textColor="#000"
+            android:textColorHint="#000000"
             android:textSize="19sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -59,15 +88,28 @@
         android:layout_margin="10dp"
         android:background="@drawable/buttons"
         android:fontFamily="@font/poppins_semibold"
-        android:text="Reset Username"
+        android:text="Update Profile"
         android:textAllCaps="false"
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.842"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
-        app:layout_constraintVertical_bias="0.364"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5"
+        app:layout_constraintVertical_bias="0.037"
         tools:ignore="MissingConstraints" />
+
+    <com.tuyenmonkey.mkloader.MKLoader
+        android:id="@+id/updateLoader"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/updatebutton"
+        app:layout_constraintVertical_bias="0.053"
+        app:mk_color="#0466C8"
+        app:mk_type="Worm" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

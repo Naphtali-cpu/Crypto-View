@@ -49,7 +49,7 @@ class LoginPref {
         return user
     }
 
-    fun LogoutUser() {
+    fun logoutUser() {
         editor.clear()
         editor.commit()
         var i : Intent = Intent(con, SignIn::class.java)

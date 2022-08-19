@@ -83,6 +83,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="top"
+                    android:textColor="#000"
                     android:inputType="textMultiLine"
                     android:lines="8"
                     android:overScrollMode="always"

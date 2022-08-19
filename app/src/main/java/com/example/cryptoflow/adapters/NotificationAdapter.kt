@@ -73,7 +73,7 @@ class NotificationAdapter(
             override fun onDataChange(snapshot: DataSnapshot) {
                 val user = snapshot.getValue<User>(User::class.java)
 
-                Picasso.with(imgView.context).load(user!!.getImage()).placeholder(R.drawable.profile).into(imgView)
+                Picasso.with(imgView.context).load(user!!.getImage()).placeholder(R.drawable.face).into(imgView)
                 username.text =(user.getUsername())
             }
         })

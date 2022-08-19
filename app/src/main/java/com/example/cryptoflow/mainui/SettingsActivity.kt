@@ -19,5 +19,19 @@ class SettingsActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        shareApp.setOnClickListener {
+            val sendIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(
+                    Intent.EXTRA_TEXT,
+                    "Track 500 + of crypto currencies on 150+ exchanges completely free and secure. You can also share your views or advice on crypto's today market! " +
+                            "\n Download Crypto View at: https://github.com/Naphtali-cpu/Crypto-View"
+                )
+                type = "text/plain"
+            }
+            startActivity(sendIntent)
+
+        }
+
     }
 }

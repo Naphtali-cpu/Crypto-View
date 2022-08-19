@@ -164,7 +164,7 @@ class PostAdapter(private val mContext:Context, private  val mPost:List<Post>):R
 
         val notifyMap = HashMap<String, Any>()
         notifyMap["userid"] = FirebaseAuth.getInstance().currentUser!!.uid
-        notifyMap["text"] = "♥liked your post♥"
+        notifyMap["text"] = "liked your post♥"
         notifyMap["postid"] = postid
         notifyMap["ispost"] = true
 

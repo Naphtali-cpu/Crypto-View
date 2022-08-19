@@ -70,13 +70,12 @@ class ListActivity : AppCompatActivity() {
         dbref.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
-
                 if (snapshot.exists()){
-
                     for (userSnapshot in snapshot.children){
                         val user = userSnapshot.getValue(Post::class.java)
                         userArrayList.add(user!!)
                     }
+                    homeShimmerLayout.visibility = View.GONE
                     userRecyclerview.adapter = PostAdapter(baseContext, userArrayList)
                 }
 
@@ -201,21 +200,25 @@ class ListActivity : AppCompatActivity() {
                 call: Call<List<CryptoData>>,
                 response: Response<List<CryptoData>>
             ) {
-                hideProgressBar()
+//                hideProgressBar()
+                homerecyclerviewlist.visibility = View.VISIBLE
+                watchListShimmer.visibility = View.GONE
                 myAdapter = CryptoListAdapter(baseContext, response.body()!!)
                 homerecyclerviewlist.adapter = myAdapter
                 myAdapter.notifyDataSetChanged()
             }
 
             override fun onFailure(call: Call<List<CryptoData>>, t: Throwable) {
-                hideProgressBar()
+//                hideProgressBar()
+                homerecyclerviewlist.visibility = View.VISIBLE
+                watchListShimmer.visibility = View.GONE
                 Toast.makeText(applicationContext, "Check Your Internet Connection!", Toast.LENGTH_LONG).show()
                 Log.d("ListActivity", "onFailure:" + t.message)
             }
         })
     }
 
-    private fun hideProgressBar() {
-        newLoader.visibility = View.GONE
-    }
+//    private fun hideProgressBar() {
+//        newLoader.visibility = View.GONE
+//    }
 }
