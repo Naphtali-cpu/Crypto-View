@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EBF3FB"
+    android:background="?attr/background_color"
     tools:context=".mainui.AppInfo">
 
     <TextView
@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/poppins_semibold"
         android:text="App Info"
-        android:textColor="#050A1A"
+        android:textColor="?attr/text_color"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +30,7 @@
         android:layout_marginTop="88dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="Developer"
-        android:textColor="#050A1A"
+        android:textColor="?attr/text_color"
         android:textSize="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -41,7 +41,7 @@
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/poppins_semibold"
         android:text="Naphtali Makori"
-        android:textColor="#050A1A"
+        android:textColor="?attr/text_color"
         android:textSize="15dp"
         app:layout_constraintStart_toStartOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -55,7 +55,7 @@
         android:layout_marginTop="160dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="Let's Get In Touch"
-        android:textColor="#050A1A"
+        android:textColor="?attr/text_color"
         android:textSize="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -67,7 +67,7 @@
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/poppins_semibold"
         android:text="Email@ naphtali919@gmail.com"
-        android:textColor="#050A1A"
+        android:textColor="?attr/text_color"
         android:textSize="15dp"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -80,7 +80,7 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="Call@ +254727991993"
-        android:textColor="#050A1A"
+        android:textColor="?attr/text_color"
         android:textSize="15dp"
         app:layout_constraintStart_toStartOf="@+id/emailTxt"
         app:layout_constraintTop_toBottomOf="@+id/emailTxt" />

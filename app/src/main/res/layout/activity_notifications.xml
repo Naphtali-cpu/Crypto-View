@@ -48,7 +48,7 @@
           android:layout_marginTop="30dp"
           android:fontFamily="@font/poppins_semibold"
           android:text="Notifications"
-          android:textColor="#050A1A"
+          android:textColor="?attr/text_color"
           android:textSize="20dp"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"

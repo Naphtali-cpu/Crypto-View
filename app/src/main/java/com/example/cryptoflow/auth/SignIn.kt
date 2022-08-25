@@ -1,5 +1,6 @@
 package com.example.cryptoflow.auth
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,6 +17,13 @@ import kotlinx.android.synthetic.main.activity_sign_in.*
 
 class SignIn : AppCompatActivity() {
 
+    companion object {
+        @JvmStatic
+        fun buildLaunchIntent(context: Context): Intent {
+            return Intent(context, SignIn::class.java)
+        }
+    }
+
     lateinit var session: LoginPref
     private lateinit var databaseReference: DatabaseReference
     private lateinit var mAuth: FirebaseAuth
@@ -27,6 +35,17 @@ class SignIn : AppCompatActivity() {
         databaseReference = Firebase.database.reference
         mAuth = Firebase.auth
 
+        if (session.isLoggedIn()) {
+            val intent = Intent(this,ListActivity :: class.java)
+            startActivity(intent)
+            finish()
+        } else {
+            logInUser()
+        }
+
+    }
+
+    private fun logInUser() {
         signinbutton.setOnClickListener {
             val email = signinemail.text.toString()
             val password = signinpassword.text.toString()

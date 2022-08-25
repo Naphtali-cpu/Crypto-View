@@ -21,6 +21,8 @@ interface ApiInterface {
     ): Call<List<CryptoData>>
 
 
+
+
     @GET("coins/{id}")
     fun getCurrentData(
         @Path("id") id: String

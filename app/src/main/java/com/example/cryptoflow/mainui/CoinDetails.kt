@@ -27,6 +27,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.NumberFormat
 
 
 class CoinDetails : AppCompatActivity() {
@@ -43,7 +44,6 @@ class CoinDetails : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coin_details)
-
 
         val id = intent.getStringExtra("id")
         val percent = intent.getStringExtra("percent")
@@ -106,12 +106,13 @@ class CoinDetails : AppCompatActivity() {
 
         markRank.text = "# $popularity"
         currPrice.text = "$ $currentPrice"
+
         Picasso.with(this).load(coinLogo).into(imageCoin)
 
-        back.setOnClickListener {
-            val intent = Intent(this, PostsActivity::class.java)
-            startActivity(intent)
-        }
+//        back.setOnClickListener {
+//            val intent = Intent(this, PostsActivity::class.java)
+//            startActivity(intent)
+//        }
         rbPeriod1D.setOnClickListener {
             plotGraphData(id)
         }
@@ -373,7 +374,22 @@ class CoinDetails : AppCompatActivity() {
 
     private fun setupEventListeners() {
         stockChartData.isScrubEnabled = true
+        stockChartData.setScrubListener { itemData ->
+            if (itemData is GraphDataSubList) {
+//                updateScrubData(itemData)
+            }
+        }
     }
+
+//    private fun updateScrubData(scrubData: GraphDataSubList) {
+//        val currentPrice = ArrayList<GraphDataSubList>()
+//        currPrice.text = NumberFormat.getInstance().format(currentPrice[1][4].toFloat())
+//    }
+
+//    private fun updateInfoOnScrub(dataSubList: GraphDataSubList) {
+//        currPrice.text = NumberFormat.getInstance().format(adapter)
+//    }
+
     private fun hideProgressBar() {
         graphLoader.visibility = View.GONE
     }

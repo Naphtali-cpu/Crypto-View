@@ -1,6 +1,7 @@
 package com.example.cryptoflow.webview
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cryptoflow.R
+import com.example.cryptoflow.mainui.NewsActivity
 import kotlinx.android.synthetic.main.activity_news_view.*
 
 
@@ -36,10 +38,7 @@ class NewsView : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (webview.canGoBack()) {
-            webview.goBack()
-        } else {
-            super.onBackPressed()
-        }
+        val intent = Intent(this, NewsActivity::class.java)
+        startActivity(intent)
     }
 }

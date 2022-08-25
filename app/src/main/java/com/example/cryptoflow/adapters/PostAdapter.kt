@@ -37,8 +37,8 @@ class PostAdapter(private val mContext:Context, private  val mPost:List<Post>):R
     private var firebaseUser:FirebaseUser?=null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view=LayoutInflater.from(mContext).inflate(R.layout.posts_layout,parent,false)
-        return ViewHolder(view)
+        val postView = LayoutInflater.from(mContext).inflate(R.layout.posts_layout, parent,false)
+        return ViewHolder(postView)
 
     }
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EBF3FB"
+    android:background="?attr/background_color"
     android:id="@+id/loginForm"
     tools:context=".auth.SignIn">
 
@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="#5B5A5A"
-                android:textColor="#000"
+                android:textColor="?attr/text_color"
                 android:hint="Email "
                 android:inputType="textEmailAddress"
                 android:textSize="19sp" />
@@ -63,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password"
-                android:textColor="#000"
+                android:textColor="?attr/text_color"
                 android:textColorHint="#5B5A5A"
                 android:inputType="textPassword"
                 android:textSize="19sp"
@@ -107,7 +107,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
             android:text="Don't Have an Account?"
-            android:textColor="#000"
+            android:textColor="?attr/text_color"
             android:textSize="16sp" />
 
         <TextView
@@ -117,7 +117,7 @@
             android:layout_marginLeft="8dp"
             android:fontFamily="@font/poppins_semibold"
             android:text="Sign Up"
-            android:textColor="#0466C8"
+            android:textColor="#3456FF"
             android:textSize="17sp" />
     </LinearLayout>
 
@@ -129,7 +129,7 @@
         android:layout_marginTop="150dp"
         android:fontFamily="@font/poppins_medium"
         android:text="Sign In To Your Account"
-        android:textColor="#14213D"
+        android:textColor="?attr/text_color"
         android:textSize="25dp" />
 
 </RelativeLayout>

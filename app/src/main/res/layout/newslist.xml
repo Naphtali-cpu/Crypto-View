@@ -31,7 +31,7 @@
         android:layout_marginTop="30dp"
         android:fontFamily="@font/poppins_medium"
         android:text="Elon Musk says Bitcoin is almost everything now"
-        android:textColor="#000"
+        android:textColor="?attr/text_color"
         android:textSize="15dp" />
 
 </RelativeLayout>

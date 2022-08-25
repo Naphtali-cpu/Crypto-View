@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EBF3FB"
+    android:background="?attr/background_color"
     tools:context=".mainui.CoinDetails">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#EBF3FB">
+        android:background="?attr/background_color">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -59,7 +59,7 @@
                 android:layout_marginStart="23dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text=""
-                android:textColor="#282D3E"
+                android:textColor="?attr/text_color"
                 android:textSize="15dp"
                 app:layout_constraintEnd_toStartOf="@+id/currPrice"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -86,8 +86,8 @@
                 android:layout_centerHorizontal="true"
                 android:fontFamily="@font/poppins_semibold"
                 android:text=" "
-                android:textColor="#282D3E"
-                android:textSize="15dp"
+                android:textColor="?attr/text_color"
+                android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -104,7 +104,7 @@
 
                 <com.robinhood.spark.SparkView
                     android:id="@+id/stockChartData"
-                    android:layout_width="match_parent"
+                    android:layout_width="400dp"
                     android:layout_height="250dp"
                     android:background="@drawable/gradient_background"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -211,7 +211,7 @@
                 android:layout_marginTop="140dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Market Stats"
-                android:textColor="#050A1A"
+                android:textColor="?attr/text_color"
                 android:textSize="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardChartData" />
@@ -237,7 +237,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Total Volume"
-                android:textColor="#000000"
+                android:textColor="?attr/text_color"
                 android:textSize="15dp"
                 app:layout_constraintEnd_toStartOf="@+id/markCap"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -254,7 +254,7 @@
                 android:layout_marginEnd="4dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="  "
-                android:textColor="#282D3E"
+                android:textColor="?attr/text_color"
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/markCap" />
@@ -280,7 +280,7 @@
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Market Cap"
-                android:textColor="#000000"
+                android:textColor="?attr/text_color"
                 android:textSize="15dp"
                 app:layout_constraintEnd_toStartOf="@+id/totalVol"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -296,7 +296,7 @@
                 android:layout_marginEnd="4dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text=" hshtydt "
-                android:textColor="#282D3E"
+                android:textColor="?attr/text_color"
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardChartData" />
@@ -322,7 +322,7 @@
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Popularity"
-                android:textColor="#000000"
+                android:textColor="?attr/text_color"
                 android:textSize="15dp"
                 app:layout_constraintEnd_toStartOf="@+id/markRank"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -338,7 +338,7 @@
                 android:layout_marginEnd="4dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text=""
-                android:textColor="#282D3E"
+                android:textColor="?attr/text_color"
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/totalVol" />
@@ -351,7 +351,7 @@
                 android:layout_marginTop="50dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="About "
-                android:textColor="#050A1A"
+                android:textColor="?attr/text_color"
                 android:textSize="20dp"
                 app:layout_constraintHorizontal_bias="0.093"
                 app:layout_constraintStart_toStartOf="parent"
@@ -365,7 +365,7 @@
                 android:layout_centerHorizontal="true"
                 android:fontFamily="@font/poppins_semibold"
                 android:text=""
-                android:textColor="#050A1A"
+                android:textColor="?attr/text_color"
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -381,19 +381,19 @@
             android:layout_marginTop="30dp"
             android:fontFamily="@font/poppins_semibold"
             android:text="Coin Details"
-            android:textColor="#050A1A"
+            android:textColor="?attr/text_color"
             android:textSize="20dp" />
 
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="344dp"
-            android:src="@drawable/backto" />
+<!--        <ImageView-->
+<!--            android:id="@+id/back"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentTop="true"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_marginTop="30dp"-->
+<!--            android:layout_marginEnd="344dp"-->
+<!--            android:src="@drawable/backto" />-->
 
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/afterChips"

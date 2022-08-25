@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.CryptoFlow" parent="Theme.Material3.Light.NoActionBar">
+    <style name="Theme.CryptoFlow" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#0466C8</item>
-        <item name="colorPrimaryVariant">#0466C8</item>
+        <item name="colorPrimary">#3456FF</item>
+        <item name="colorPrimaryVariant">#3456FF</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -13,7 +13,9 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
 
-        <item name="text_color">#14213D</item>
-        <item name="background_color">#EBF3FB</item>
+
+        <item name="text_color">#EBF3FB</item>
+        <item name="background_color">#0A1428</item>
+        <item name="onboarding_alttxt">#EBF3FB</item>
     </style>
 </resources>

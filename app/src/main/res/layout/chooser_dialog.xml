@@ -6,6 +6,7 @@
     android:paddingStart="20dp"
     android:paddingTop="20dp"
     android:paddingEnd="20dp"
+    android:background="?attr/background_color"
     android:paddingBottom="10dp">
 
     <TextView

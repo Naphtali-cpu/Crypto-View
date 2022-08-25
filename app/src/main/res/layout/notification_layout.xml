@@ -22,7 +22,7 @@
             android:id="@+id/notification_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000"
+            android:textColor="?attr/text_color"
             android:fontFamily="@font/poppins_semibold"
             android:textSize="15sp"
             android:textStyle="bold" />

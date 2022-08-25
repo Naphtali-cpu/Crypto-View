@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EBF3FB"
+    android:background="?attr/background_color"
     tools:context=".mainui.UpdateAccount">
 
     <TextView
@@ -15,7 +15,7 @@
         android:layout_marginTop="30dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="Update Profile"
-        android:textColor="#050A1A"
+        android:textColor="?attr/text_color"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,11 +71,11 @@
             android:id="@+id/prefUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="?attr/background_color"
             android:hint="Prefered Username "
             android:inputType="text"
             android:maxLength="30"
-            android:textColor="#000"
+            android:textColor="?attr/text_color"
             android:textColorHint="#000000"
             android:textSize="19sp" />
 
@@ -109,7 +109,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/updatebutton"
         app:layout_constraintVertical_bias="0.053"
-        app:mk_color="#0466C8"
+        app:mk_color="#3456FF"
         app:mk_type="Worm" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

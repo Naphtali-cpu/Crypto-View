@@ -9,8 +9,6 @@
     tools:context=".mainui.ListActivity"
     tools:ignore="HardcodedText">
 
-
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/link_to_post"
         android:layout_width="wrap_content"
@@ -141,6 +139,7 @@
                 android:id="@+id/homerecyclerviewlist"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
+                android:layout_marginTop="-20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/watchlistTxt"
@@ -195,6 +194,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="90dp"
+                android:layout_marginTop="-20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -228,7 +228,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#EBF3FB"
+        android:background="?attr/background_color"
         app:itemIconSize="30dp"
         app:itemIconTint="@drawable/item_selector"
         app:labelVisibilityMode="unlabeled"
