@@ -16,5 +16,6 @@
         <item name="text_color">#0A1428</item>
         <item name="background_color">#EBF3FB</item>
         <item name="onboarding_alttxt">#485778</item>
+        <item name="img_color">#0A1428</item>
     </style>
 </resources>

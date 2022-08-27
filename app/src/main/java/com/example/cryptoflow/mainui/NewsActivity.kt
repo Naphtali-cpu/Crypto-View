@@ -22,6 +22,7 @@ const val BASE_URL2 = "https://api.polygon.io/v2/"
 class NewsActivity : AppCompatActivity() {
     lateinit var linearLayoutManager: LinearLayoutManager
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
@@ -69,7 +70,7 @@ class NewsActivity : AppCompatActivity() {
     private fun fetchJson() {
         println("Attempting to fetch JSON")
 
-        val url = "https://api.polygon.io/v2/reference/news?limit=6&apiKey=ilQSt9FKzshy2TT8ft25pwWqNhggcfmD"
+        val url = "https://api.polygon.io/v2/reference/news?limit=${200}&apiKey=ilQSt9FKzshy2TT8ft25pwWqNhggcfmD"
 
         val request = Request.Builder().url(url).build()
         val client = OkHttpClient()

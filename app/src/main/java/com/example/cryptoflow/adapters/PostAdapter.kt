@@ -33,13 +33,14 @@ import kotlinx.android.synthetic.main.cryptolist.view.*
 import java.lang.reflect.Array.get
 
 
-class PostAdapter(private val mContext:Context, private  val mPost:List<Post>):RecyclerView.Adapter<PostAdapter.ViewHolder>() {
-    private var firebaseUser:FirebaseUser?=null
+class PostAdapter(private val context: Context, private  val mPost:List<Post>):RecyclerView.Adapter<PostAdapter.ViewHolder>() {
+
+    private var firebaseUser: FirebaseUser? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val postView = LayoutInflater.from(mContext).inflate(R.layout.posts_layout, parent,false)
-        return ViewHolder(postView)
-
+        return ViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.posts_layout, parent, false)
+        )
     }
 
     override fun getItemCount(): Int {
@@ -63,18 +64,18 @@ class PostAdapter(private val mContext:Context, private  val mPost:List<Post>):R
 
         holder.profileImage.setOnClickListener {
 
-            val intent = Intent(mContext, Profile::class.java).apply {
+            val intent = Intent(context, Profile::class.java).apply {
                 putExtra("PUBLISHER_ID", post.getPublisher())
             }
-            mContext.startActivity(intent)
+            context.startActivity(intent)
         }
 
         holder.username.setOnClickListener {
 
-            val intent = Intent(mContext, Profile::class.java).apply {
+            val intent = Intent(context, Profile::class.java).apply {
                 putExtra("PUBLISHER_ID", post.getPublisher())
             }
-            mContext.startActivity(intent)
+            context.startActivity(intent)
         }
 
         holder.likeButton.setOnClickListener{
@@ -102,10 +103,10 @@ class PostAdapter(private val mContext:Context, private  val mPost:List<Post>):R
         }
 
         holder.likes.setOnClickListener {
-            val intent = Intent(mContext, ShowUsersActivity::class.java)
+            val intent = Intent(context, ShowUsersActivity::class.java)
             intent.putExtra("id",post.getPostId())
             intent.putExtra("title","likes")
-            mContext.startActivity(intent)
+            context.startActivity(intent)
         }
 
         holder.commentButton.setOnClickListener { v ->
@@ -184,11 +185,11 @@ class PostAdapter(private val mContext:Context, private  val mPost:List<Post>):R
 
             override fun onDataChange(datasnapshot: DataSnapshot) {
                 if (datasnapshot.child(firebaseUser!!.uid).exists()) {
-                    imageView.setImageResource(R.drawable.likedbutton)
+                    imageView.setImageResource(R.drawable.prev_like)
                     imageView.tag = "liked"
                 }
                 else {
-                    imageView.setImageResource(R.drawable.initialike)
+                    imageView.setImageResource(R.drawable.new_like)
                     imageView.tag = "like"
                 }
             }

@@ -72,69 +72,69 @@
                 app:queryHint="Search Coins..." />
 
 
-            <TextView
-                android:id="@+id/sortByTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Sort By:"
-                android:textColor="?attr/text_color"
-                android:textSize="15dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/country_search" />
+<!--            <TextView-->
+<!--                android:id="@+id/sortByTxt"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_centerHorizontal="true"-->
+<!--                android:layout_marginStart="20dp"-->
+<!--                android:layout_marginTop="12dp"-->
+<!--                android:fontFamily="@font/poppins_medium"-->
+<!--                android:text="Sort By:"-->
+<!--                android:textColor="?attr/text_color"-->
+<!--                android:textSize="15dp"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/country_search" />-->
 
-            <HorizontalScrollView
-                android:id="@+id/newsRecycler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:scrollbars="none"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sortByTxt">
+<!--            <HorizontalScrollView-->
+<!--                android:id="@+id/newsRecycler"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="10dp"-->
+<!--                android:scrollbars="none"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintHorizontal_bias="0.0"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/sortByTxt">-->
 
-                <com.google.android.material.chip.ChipGroup
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    app:singleLine="true">
+<!--                <com.google.android.material.chip.ChipGroup-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="10dp"-->
+<!--                    app:singleLine="true">-->
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/markets"
-                        style="@style/Widget.Material3.Chip.Suggestion"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:text="Market cap dec"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        app:chipBackgroundColor="#0466C8"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.498"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/image_view" />
+<!--                    <com.google.android.material.chip.Chip-->
+<!--                        android:id="@+id/markets"-->
+<!--                        style="@style/Widget.Material3.Chip.Suggestion"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:text="Market cap dec"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        app:chipBackgroundColor="#0466C8"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintHorizontal_bias="0.498"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/image_view" />-->
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/mrktCapAsc"
-                        style="@style/Widget.Material3.Chip.Suggestion"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:text="Market cap asc"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        app:chipBackgroundColor="#0466C8"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.498"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/image_view" />
+<!--                    <com.google.android.material.chip.Chip-->
+<!--                        android:id="@+id/mrktCapAsc"-->
+<!--                        style="@style/Widget.Material3.Chip.Suggestion"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:text="Market cap asc"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        app:chipBackgroundColor="#0466C8"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintHorizontal_bias="0.498"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/image_view" />-->
 
 
-                </com.google.android.material.chip.ChipGroup>
+<!--                </com.google.android.material.chip.ChipGroup>-->
 
-            </HorizontalScrollView>
+<!--            </HorizontalScrollView>-->
 
             <LinearLayout
                 android:id="@+id/linearLayout"
@@ -146,7 +146,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newsRecycler">
+                app:layout_constraintTop_toBottomOf="@+id/country_search">
 
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -154,6 +154,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerMarketCapAsc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
 
             </LinearLayout>
 
@@ -179,7 +184,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/linearLayout3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newsRecycler">
+                app:layout_constraintTop_toBottomOf="@+id/country_search">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -194,6 +199,8 @@
 
                     <include layout="@layout/watchlist_placeholder" />
 
+                    <include layout="@layout/watchlist_placeholder" />
+                    <include layout="@layout/watchlist_placeholder" />
                     <include layout="@layout/watchlist_placeholder" />
 
                 </LinearLayout>
