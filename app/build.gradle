@@ -102,4 +102,7 @@ dependencies {
 
 //    Ticker Dependency
     implementation 'com.robinhood.ticker:ticker:2.0.2'
+
+//    Read more textview
+    implementation 'com.borjabravo:readmoretextview:2.1.0'
 }

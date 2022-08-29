@@ -3,7 +3,7 @@ package com.example.cryptoflow.adapters
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color.green
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,17 +15,15 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoflow.R
 import com.example.cryptoflow.data.CryptoData
-import com.example.cryptoflow.data.Tickers
 import com.example.cryptoflow.mainui.CoinDetails
-import com.robinhood.spark.SparkAdapter
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.cryptolist.view.*
 import java.text.NumberFormat
 import java.util.*
-import kotlin.collections.ArrayList
+
 
 class CryptoListAdapter(val context: Context, var userList: List<CryptoData>) : RecyclerView.Adapter<CryptoListAdapter.CryptoViewHolder>(), Filterable {
-
+    var photosList: ArrayList<CryptoData> = ArrayList()
     inner class CryptoViewHolder(view : View) : RecyclerView.ViewHolder(view){
         var cryptoName: TextView
         var initials: TextView
@@ -71,6 +69,7 @@ class CryptoListAdapter(val context: Context, var userList: List<CryptoData>) : 
             holder.pricePercent.setTextColor(context.resources.getColor(R.color.red))
             holder.pricePercent.text = "${userList[position].price_change_percentage_24h} %"
         }
+//        Log.i("FIRST", userList[position].price_change_percentage_24h.toString())
 //        Pass data to the next activity and redirection
 
         holder.listCoin.setOnClickListener { v ->
@@ -78,7 +77,7 @@ class CryptoListAdapter(val context: Context, var userList: List<CryptoData>) : 
             val intent = Intent(context, CoinDetails::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             intent.putExtra("id", userList[position].id)
-            intent.putExtra("percent", userList[position].price_change_percentage_24h)
+            intent.putExtra("percentCoin", userList[position].price_change_percentage_24h.toString())
             intent.putExtra("name", userList[position].name)
             intent.putExtra("marketcap", userList[position].market_cap)
             intent.putExtra("lastupdate", userList[position].last_updated)
@@ -89,6 +88,7 @@ class CryptoListAdapter(val context: Context, var userList: List<CryptoData>) : 
             context.startActivity(intent)
         }
     }
+
 
     override fun getFilter(): Filter {
         return myFilter
@@ -102,20 +102,26 @@ class CryptoListAdapter(val context: Context, var userList: List<CryptoData>) : 
                 filteredList.addAll(userList)
             } else {
                 for (row in userList) {
-                    if (row.name.toLowerCase(Locale.ROOT).contains(charSearch.toLowerCase(Locale.ROOT))) {
+                    if (row.name.lowercase(Locale.ROOT).contains(charSearch.lowercase(Locale.ROOT))) {
                         filteredList.add(row)
                     }
                 }
                 userList = filteredList
             }
-            val filterResult = FilterResults()
-            filterResult.values = filteredList
-            return filterResult
+
+            val filterResults = FilterResults()
+            filterResults.values = userList
+            return filterResults
+
+//            val filterResult = FilterResults()
+//            filterResult.values = filteredList
+//            return filterResult
         }
 
         @SuppressLint("NotifyDataSetChanged")
-        override fun publishResults(charSequence: CharSequence?, filterResult: FilterResults?) {
-            userList = filterResult?.values as List<CryptoData>
+        override fun publishResults(charSequence: CharSequence?, filterResult: FilterResults) {
+            userList = filterResult.values as ArrayList<CryptoData>
+
             notifyDataSetChanged()
         }
 

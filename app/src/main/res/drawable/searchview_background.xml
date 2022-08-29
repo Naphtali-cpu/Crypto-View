@@ -6,9 +6,9 @@
         android:radius="5dp"/>
     <stroke
         android:color="#0466C8"
-        android:width="2dp"/>
+        android:width="3dp"/>
 
-    <solid android:color="#FFFFFF"
+    <solid android:color="?attr/background_color"
         />
     <padding
         android:left="10dp"/>

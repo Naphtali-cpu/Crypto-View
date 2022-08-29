@@ -68,7 +68,7 @@ class Profile : AppCompatActivity() {
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val value = snapshot.value.toString()
-                Log.d("TAG", "Value is: " + value);
+                Log.d("TAG", "Value is: " + value)
                 user_name.text = value
             }
 
@@ -82,7 +82,7 @@ class Profile : AppCompatActivity() {
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val imgValue = snapshot.value.toString()
-                Log.d("TAG", "Image Value is: " + imgValue);
+                Log.d("TAG", "Image Value is: " + imgValue)
                 Picasso.with(this@Profile).load(imgValue).into(profileImage)
             }
 

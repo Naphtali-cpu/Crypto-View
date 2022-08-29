@@ -196,7 +196,9 @@ class PostAdapter(private val context: Context, private  val mPost:List<Post>):R
         })
     }
 
-    private fun getCountofLikes(postid:String,likesNo: TextView) {
+    
+
+    private fun getCountofLikes(postid: String,likesNo: TextView) {
 
         val postRef=FirebaseDatabase.getInstance().reference.child("Likes").child(postid)
 

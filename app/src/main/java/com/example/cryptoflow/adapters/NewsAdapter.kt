@@ -49,6 +49,4 @@ class NewsAdapter(val homeFeed: HomeFeed): RecyclerView.Adapter<CustomViewHolder
 
 }
 
-class CustomViewHolder(val view: View): RecyclerView.ViewHolder(view) {
-
-}
+class CustomViewHolder(val view: View): RecyclerView.ViewHolder(view)

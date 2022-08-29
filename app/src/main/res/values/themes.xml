@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.CryptoFlow" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.CryptoFlow" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#3456FF</item>
         <item name="colorPrimaryVariant">#3456FF</item>
@@ -17,5 +17,7 @@
         <item name="background_color">#EBF3FB</item>
         <item name="onboarding_alttxt">#485778</item>
         <item name="img_color">#0A1428</item>
+
     </style>
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView"/>
 </resources>

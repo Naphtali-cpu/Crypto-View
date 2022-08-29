@@ -46,7 +46,7 @@ class CoinDetails : AppCompatActivity() {
         setContentView(R.layout.activity_coin_details)
 
         val id = intent.getStringExtra("id")
-        val percent = intent.getStringExtra("percent")
+        val percent = intent.getStringExtra("percentCoin")
         val coinName = intent.getStringExtra("name")
         val marketCap = intent.getStringExtra("marketcap")
         val lastUpdate = intent.getStringExtra("lastupdate")
@@ -83,7 +83,7 @@ class CoinDetails : AppCompatActivity() {
                 //            Million
                 markCap.text = "$ ${marketCap.slice(0..2)} Million"
             } else {
-                Toast.makeText(applicationContext, "Something went wrong", Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, "Market Cap Doesn't Exist", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -348,7 +348,7 @@ class CoinDetails : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val destination = response.body()
                     destination?.let {
-                        aboutCoin.setText(destination.description.en)
+                        aboutCoin.text = destination.description.en
                     }
                 } else {
 

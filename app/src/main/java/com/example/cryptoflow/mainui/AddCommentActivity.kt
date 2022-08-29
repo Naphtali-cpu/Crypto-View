@@ -62,7 +62,7 @@ class AddCommentActivity : AppCompatActivity() {
             if (add_comment.text.toString().equals("")) {
                 Toast.makeText(this, "You can't send an empty comment", Toast.LENGTH_SHORT).show()
             } else {
-                postComment(postid!!)
+                postComment(postid)
             }
         }
     }

@@ -14,6 +14,8 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.ktx.app
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import java.util.*
+import kotlin.collections.HashMap
 
 class SignUp : AppCompatActivity() {
     private lateinit var databaseReference: DatabaseReference
@@ -77,7 +79,7 @@ class SignUp : AppCompatActivity() {
         val userMap=HashMap<String,Any>()
         userMap["uid"]=currentUserId
         userMap["fullname"]=fullName
-        userMap["username"]=userName.toLowerCase()
+        userMap["username"]= userName.lowercase(Locale.getDefault())
         userMap["email"]=email
         userMap["bio"]="Hey! I am using InstaApp"
         userMap["image"]="gs://instagram-clone-app-205f9.appspot.com/Default images/profile.png"

@@ -74,7 +74,6 @@
                 android:layout_marginStart="23dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text=""
-                android:textColor="#282D3E"
                 android:textSize="15dp"
                 app:layout_constraintStart_toEndOf="@+id/coin"
                 app:layout_constraintTop_toBottomOf="@+id/textCoin" />
@@ -353,12 +352,13 @@
                 android:text="About "
                 android:textColor="?attr/text_color"
                 android:textSize="20dp"
+
                 app:layout_constraintHorizontal_bias="0.093"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
 
-            <TextView
+            <com.borjabravo.readmoretextview.ReadMoreTextView
                 android:id="@+id/aboutCoin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -367,10 +367,14 @@
                 android:text=""
                 android:textColor="?attr/text_color"
                 android:textSize="15dp"
+                app:colorClickableText="?attr/text_color"
+                app:trimCollapsedText="@string/read_more"
+                app:trimExpandedText="@string/read_less"
+                app:trimLength="300"
+                app:trimMode="trimModeLength"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
