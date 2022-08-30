@@ -52,7 +52,28 @@
             android:exported="false" />
         <activity
             android:name=".mainui.Profile"
-            android:exported="false" />
+            android:exported="true" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="https"
+                    android:host="naphtali.netlify.app"
+                    android:pathPrefix="/profile"/>
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="cryptoflow"
+                    android:host="profile"/>
+            </intent-filter>
+
+        </activity>
         <activity
             android:name=".webview.NewsView"
             android:exported="false" />

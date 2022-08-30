@@ -1,17 +1,20 @@
 # Crypto View
 ## Author
 Naphtali Makori
-## App under construction!!!
+## Will be updating the app's clean architecture soon!
 ## Description
 
-This is an application that allows users to search for places to go have fun, take a walk or anything that satisfies them since it is hard to find places or trails to go to and be satisfied.
+This is an application that allows users to share their views on cryptocurrency and also be able to view updates of over 1000 cryptocurrencies and news all in one app!
 
 ## Demo
 
-<img src="splash2.jpg" width="250" height="550">     <img src="1.jpg" width="250" height="550">     <img src="2.jpg" width="250" height="550">
+<img src="splash.jpg" width="250" height="550">     <img src="1.jpg" width="250" height="550">     <img src="2.jpg" width="250" height="550">
 
 <img src="3.jpg" width="250" height="550">     <img src="4.jpg" width="250" height="550">   <img src="5.jpg" width="250" height="550">
 
+<img src="6.jpg" width="250" height="550">     <img src="7.jpg" width="250" height="550">   <img src="8.jpg" width="250" height="550">
+
+<img src="9.jpg" width="250" height="550">
 
 
 ## Installation Guide
