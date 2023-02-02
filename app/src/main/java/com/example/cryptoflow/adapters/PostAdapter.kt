@@ -2,17 +2,14 @@ package com.example.cryptoflow.adapters
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.NonNull
-import androidx.core.content.ContextCompat.startActivity
-import androidx.fragment.app.FragmentActivity
+
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoflow.R
 import com.example.cryptoflow.data.Post
@@ -29,8 +26,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.cryptolist.view.*
-import java.lang.reflect.Array.get
 
 
 class PostAdapter(private val context: Context, private  val mPost:List<Post>):RecyclerView.Adapter<PostAdapter.ViewHolder>() {
@@ -53,14 +48,19 @@ class PostAdapter(private val context: Context, private  val mPost:List<Post>):R
         val post = mPost[position]
         val postid = post.getPostId()
 
-        Picasso.with(holder.postImage.context).load(post.getPostImage()).into(holder.postImage)
+        if (post.getPostImage().isEmpty()) {
+            holder.postImage.visibility = View.GONE
+//            Toast.makeText(context, "Image doesnt exist!", Toast.LENGTH_LONG).show()
+        } else {
+            Picasso.with(holder.postImage.context).load(post.getPostImage()).into(holder.postImage)
+
+        }
 //        Picasso.get().load(post.getPostImage()).into(holder.postImage)
         holder.caption.text=post.getCaption()
         publisherInfo(holder.profileImage, holder.username, post.getPublisher())
         isLiked(post.getPostId(), holder.likeButton)
         getCountofLikes(post.getPostId(), holder.likes)
         getComments(post.getPostId(), holder.comments)
-
 
         holder.profileImage.setOnClickListener {
 

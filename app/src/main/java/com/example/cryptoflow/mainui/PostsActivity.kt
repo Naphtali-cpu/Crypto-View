@@ -28,6 +28,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.ArrayList
 
 const val BASE_URL = "https://api.coingecko.com/api/v3/"
 
@@ -58,22 +59,37 @@ class PostsActivity : AppCompatActivity() {
         bottomBar()
 
 
+
     }
 
     private fun searchCoinImpl() {
-        coin_search.setOnQueryTextListener(object: SearchView.OnQueryTextListener,
+        coin_search.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                myAdapter.filter.filter(query)
                 return false
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                myAdapter.filter.filter(newText)
+            override fun onQueryTextChange(newText: String): Boolean {
+                filter(newText)
                 return false
             }
+
 
         })
+    }
+
+    private fun filter(newText: String) {
+        val filteredList: java.util.ArrayList<CryptoData> = ArrayList()
+        for (item in list) {
+            if (item.name.toLowerCase().contains(newText.toLowerCase())) {
+                filteredList.add(item)
+            }
+        }
+        if (filteredList.isEmpty()) {
+            Toast.makeText(this, "Coin not found!", Toast.LENGTH_SHORT).show()
+        } else {
+            myAdapter.filterList(filteredList)
+        }
     }
 
 
@@ -93,23 +109,24 @@ class PostsActivity : AppCompatActivity() {
             .build()
             .create(ApiInterface::class.java)
 
-        val retrofitData = retrofitBuilder.getCrypto(100, pageId, "market_cap_desc").enqueue(object :
-            Callback<List<CryptoData>> {
-            override fun onResponse(
-                call: Call<List<CryptoData>>,
-                response: Response<List<CryptoData>>
-            ) {
-                hideShimmerEffect()
-                loading = true
-                recyclerviewlist.visibility = View.VISIBLE
-                setUpAdapter(response.body())
-            }
+        val retrofitData =
+            retrofitBuilder.getCrypto(100, pageId, "market_cap_desc").enqueue(object :
+                Callback<List<CryptoData>> {
+                override fun onResponse(
+                    call: Call<List<CryptoData>>,
+                    response: Response<List<CryptoData>>
+                ) {
+                    hideShimmerEffect()
+                    loading = true
+                    recyclerviewlist.visibility = View.VISIBLE
+                    setUpAdapter(response.body())
+                }
 
-            override fun onFailure(call: Call<List<CryptoData>>, t: Throwable) {
-                hideShimmerEffect()
-                Log.d("ListActivity", "onFailure:" + t.message)
-            }
-        })
+                override fun onFailure(call: Call<List<CryptoData>>, t: Throwable) {
+                    hideShimmerEffect()
+                    Log.d("ListActivity", "onFailure:" + t.message)
+                }
+            })
     }
 
     private fun setUpAdapter(body: List<CryptoData>?) {

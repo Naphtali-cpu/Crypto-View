@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoflow.R
@@ -22,50 +23,47 @@ import de.hdodenhof.circleimageview.CircleImageView
 
 class NotificationAdapter(
     private var mContext: Context,
-    private var mNotification:List<Notification>)
-        : RecyclerView.Adapter<NotificationAdapter.ViewHolder>() {
+    private var mNotification: List<Notification>
+) : RecyclerView.Adapter<NotificationAdapter.ViewHolder>() {
 
 
-        class ViewHolder(@NonNull itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(@NonNull itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-            var username: TextView = itemView.findViewById(R.id.notification_username)
-            var notifyText: TextView = itemView.findViewById(R.id.notification_text)
-            var profileimage: CircleImageView = itemView.findViewById(R.id.notification_image_profile)
-            var postimg: ImageView = itemView.findViewById(R.id.posted_image)
-        }
+        var username: TextView = itemView.findViewById(R.id.notification_username)
+        var notifyText: TextView = itemView.findViewById(R.id.notification_text)
+        var profileimage: CircleImageView = itemView.findViewById(R.id.notification_image_profile)
+        var postimg: ImageView = itemView.findViewById(R.id.posted_image)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view= LayoutInflater.from(mContext).inflate(R.layout.notification_layout,parent,false)
+        val view =
+            LayoutInflater.from(mContext).inflate(R.layout.notification_layout, parent, false)
         return ViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-       return mNotification.size
+        return mNotification.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val notification = mNotification[position]
-        holder.notifyText.text=notification.getText()
+        holder.notifyText.text = notification.getText()
 
-        publisherInfo(holder.profileimage,holder.username,notification.getUserId())
-        if(notification.getIsPost())
-        {
-            holder.postimg.visibility=View.VISIBLE
-            getPostedImg(holder.postimg,notification.getPostId())
-        }
-        else
-        {
-            holder.postimg.visibility=View.GONE
+        publisherInfo(holder.profileimage, holder.username, notification.getUserId())
+        if (notification.getIsPost()) {
+            holder.postimg.visibility = View.VISIBLE
+            getPostedImg(holder.postimg, notification.getPostId())
+        } else {
+            holder.postimg.visibility = View.GONE
         }
 
     }
 
     private fun publisherInfo(imgView: CircleImageView, username: TextView, publisherid: String) {
 
-        val userRef= FirebaseDatabase.getInstance().reference.child("Users").child(publisherid)
-        userRef.addValueEventListener(object : ValueEventListener
-        {
+        val userRef = FirebaseDatabase.getInstance().reference.child("Users").child(publisherid)
+        userRef.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
 
             }
@@ -73,25 +71,32 @@ class NotificationAdapter(
             override fun onDataChange(snapshot: DataSnapshot) {
                 val user = snapshot.getValue<User>(User::class.java)
 
-                Picasso.with(imgView.context).load(user!!.getImage()).placeholder(R.drawable.face).into(imgView)
-                username.text =(user.getUsername())
+                Picasso.with(imgView.context).load(user!!.getImage()).placeholder(R.drawable.face)
+                    .into(imgView)
+                username.text = (user.getUsername())
             }
         })
     }
 
-    private fun getPostedImg(postimg:ImageView, postid:String?) {
+    private fun getPostedImg(postimg: ImageView, postid: String?) {
 
-        val postRef= FirebaseDatabase.getInstance().reference.child("Posts").child(postid!!)
+        val postRef = FirebaseDatabase.getInstance().reference.child("Posts").child(postid!!)
 
         postRef.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
             }
-            override fun onDataChange(snapshot: DataSnapshot)
-            {
+
+            override fun onDataChange(snapshot: DataSnapshot) {
                 val post = snapshot.getValue(Post::class.java)
-                if (post != null) {
-                    Picasso.with(postimg.context).load(post.getPostImage()).placeholder(R.drawable.face).into(postimg)
+
+                if (post?.getPostImage()?.isEmpty() == true) {
+//                    Toast.makeText(mContext, "Something went wrong", Toast.LENGTH_LONG).show()
+                } else {
+                    Picasso.with(postimg.context).load(post?.getPostImage()).placeholder(R.drawable.face)
+                        .into(postimg)
                 }
+
+
 
             }
         })

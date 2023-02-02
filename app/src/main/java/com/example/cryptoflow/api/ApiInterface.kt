@@ -20,9 +20,6 @@ interface ApiInterface {
         @Query("order") order: String
     ): Call<List<CryptoData>>
 
-
-
-
     @GET("coins/{id}")
     fun getCurrentData(
         @Path("id") id: String

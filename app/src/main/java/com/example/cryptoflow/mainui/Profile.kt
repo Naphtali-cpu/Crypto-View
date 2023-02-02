@@ -82,11 +82,15 @@ class Profile : AppCompatActivity() {
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val imgValue = snapshot.value.toString()
-                Log.d("TAG", "Image Value is: " + imgValue)
-                Picasso.with(this@Profile).load(imgValue).into(profileImage)
+                if  (imgValue == null) {
+                    profileImage.visibility = View.VISIBLE
+                } else {
+                    Picasso.with(this@Profile).load(imgValue).into(profileImage)
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
+                profileImage.visibility = View.VISIBLE
                 Toast.makeText(applicationContext, "Something went wrong", Toast.LENGTH_LONG).show()
             }
 

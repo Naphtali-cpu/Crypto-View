@@ -22,7 +22,7 @@ import java.text.NumberFormat
 import java.util.*
 
 
-class CryptoListAdapter(val context: Context, var userList: List<CryptoData>) : RecyclerView.Adapter<CryptoListAdapter.CryptoViewHolder>(), Filterable {
+class CryptoListAdapter(val context: Context, var userList: List<CryptoData>) : RecyclerView.Adapter<CryptoListAdapter.CryptoViewHolder>() {
     var photosList: ArrayList<CryptoData> = ArrayList()
     inner class CryptoViewHolder(view : View) : RecyclerView.ViewHolder(view){
         var cryptoName: TextView
@@ -89,41 +89,8 @@ class CryptoListAdapter(val context: Context, var userList: List<CryptoData>) : 
         }
     }
 
-
-    override fun getFilter(): Filter {
-        return myFilter
-    }
-
-    var myFilter: Filter = object : Filter() {
-        override fun performFiltering(charSequence: CharSequence?): FilterResults {
-            val charSearch = charSequence.toString()
-            val filteredList: MutableList<CryptoData> = ArrayList()
-            if (charSequence == null || charSequence.length == 0) {
-                filteredList.addAll(userList)
-            } else {
-                for (row in userList) {
-                    if (row.name.lowercase(Locale.ROOT).contains(charSearch.lowercase(Locale.ROOT))) {
-                        filteredList.add(row)
-                    }
-                }
-                userList = filteredList
-            }
-
-            val filterResults = FilterResults()
-            filterResults.values = userList
-            return filterResults
-
-//            val filterResult = FilterResults()
-//            filterResult.values = filteredList
-//            return filterResult
-        }
-
-        @SuppressLint("NotifyDataSetChanged")
-        override fun publishResults(charSequence: CharSequence?, filterResult: FilterResults) {
-            userList = filterResult.values as ArrayList<CryptoData>
-
-            notifyDataSetChanged()
-        }
-
+    fun filterList(filterList: ArrayList<CryptoData>) {
+        userList = filterList
+        notifyDataSetChanged()
     }
 }

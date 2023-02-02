@@ -133,13 +133,13 @@
                     android:layout_height="40dp"
                     android:layout_marginEnd="20dp"
                     android:layout_weight="1"
-                    android:background="@drawable/selected_radio"
+                    android:background="@drawable/select_bg"
                     android:button="@null"
                     android:checked="true"
-                    android:fontFamily="@font/poppins_semibold"
                     android:gravity="center"
+                    android:fontFamily="@font/poppins_semibold"
                     android:text="1d"
-                    android:textColor="#fff"
+                    android:textColor="@drawable/selected_text"
                     android:textSize="14sp" />
 
                 <RadioButton
@@ -148,12 +148,12 @@
                     android:layout_height="40dp"
                     android:layout_marginEnd="20dp"
                     android:layout_weight="1"
-                    android:background="@drawable/selected_radio"
+                    android:background="@drawable/select_bg"
                     android:button="@null"
-                    android:fontFamily="@font/poppins_semibold"
                     android:gravity="center"
                     android:text="1w"
-                    android:textColor="#FFF"
+                    android:textColor="@drawable/selected_text"
+                    android:fontFamily="@font/poppins_semibold"
                     android:textSize="14sp" />
 
                 <RadioButton
@@ -162,12 +162,12 @@
                     android:layout_height="40dp"
                     android:layout_marginEnd="20dp"
                     android:layout_weight="1"
-                    android:background="@drawable/selected_radio"
+                    android:background="@drawable/select_bg"
                     android:button="@null"
                     android:fontFamily="@font/poppins_semibold"
                     android:gravity="center"
                     android:text="1m"
-                    android:textColor="#fff"
+                    android:textColor="@drawable/selected_text"
                     android:textSize="14sp" />
 
                 <RadioButton
@@ -176,12 +176,12 @@
                     android:layout_height="40dp"
                     android:layout_marginEnd="20dp"
                     android:layout_weight="1"
-                    android:background="@drawable/selected_radio"
+                    android:background="@drawable/select_bg"
                     android:button="@null"
                     android:fontFamily="@font/poppins_semibold"
                     android:gravity="center"
                     android:text="3m"
-                    android:textColor="#fff"
+                    android:textColor="@drawable/selected_text"
                     android:textSize="14sp" />
 
 
@@ -191,12 +191,12 @@
                     android:layout_height="40dp"
                     android:layout_marginEnd="20dp"
                     android:layout_weight="1"
-                    android:background="@drawable/selected_radio"
+                    android:background="@drawable/select_bg"
                     android:button="@null"
                     android:fontFamily="@font/poppins_semibold"
                     android:gravity="center"
                     android:text="1y"
-                    android:textColor="#fff"
+                    android:textColor="@drawable/selected_text"
                     android:textSize="14sp" />
 
 
@@ -368,13 +368,13 @@
                 android:textColor="?attr/text_color"
                 android:textSize="15dp"
                 app:colorClickableText="?attr/text_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView6"
                 app:trimCollapsedText="@string/read_more"
                 app:trimExpandedText="@string/read_less"
                 app:trimLength="300"
-                app:trimMode="trimModeLength"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                app:trimMode="trimModeLength" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -388,16 +388,16 @@
             android:textColor="?attr/text_color"
             android:textSize="20dp" />
 
-<!--        <ImageView-->
-<!--            android:id="@+id/back"-->
-<!--            android:layout_width="40dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:layout_alignParentStart="true"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:layout_alignParentEnd="true"-->
-<!--            android:layout_marginTop="30dp"-->
-<!--            android:layout_marginEnd="344dp"-->
-<!--            android:src="@drawable/backto" />-->
+        <!--        <ImageView-->
+        <!--            android:id="@+id/back"-->
+        <!--            android:layout_width="40dp"-->
+        <!--            android:layout_height="40dp"-->
+        <!--            android:layout_alignParentStart="true"-->
+        <!--            android:layout_alignParentTop="true"-->
+        <!--            android:layout_alignParentEnd="true"-->
+        <!--            android:layout_marginTop="30dp"-->
+        <!--            android:layout_marginEnd="344dp"-->
+        <!--            android:src="@drawable/backto" />-->
 
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/afterChips"

@@ -9,20 +9,18 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/splash"
+        android:icon="@drawable/newlogo"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/splash"
+        android:roundIcon="@drawable/newlogo"
         android:supportsRtl="true"
         android:theme="@style/Theme.CryptoFlow">
+
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".mainui.LaunchActivity"-->
-<!--            android:exported="true">-->
-
-<!--        </activity>-->
-
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".mainui.LaunchActivity" -->
+        <!-- android:exported="true"> -->
+        <!-- </activity> -->
         <activity
             android:name=".mainui.Notifications"
             android:exported="false" />
@@ -52,27 +50,28 @@
             android:exported="false" />
         <activity
             android:name=".mainui.Profile"
-            android:exported="true" >
-
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
 
-                <data android:scheme="https"
+                <data
                     android:host="naphtali.netlify.app"
-                    android:pathPrefix="/profile"/>
+                    android:pathPrefix="/profile"
+                    android:scheme="https" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
 
-                <data android:scheme="cryptoflow"
-                    android:host="profile"/>
+                <data
+                    android:host="profile"
+                    android:scheme="cryptoflow" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".webview.NewsView"
@@ -98,13 +97,11 @@
         <activity
             android:name=".mainui.SplashScreen"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
         <meta-data

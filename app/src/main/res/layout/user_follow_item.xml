@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/userImageProfile"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/face" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="15dp"
+        android:layout_toEndOf="@id/userImageProfile"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semibold"
+            android:maxLines="1"
+            android:text="username"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_follow"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:backgroundTint="#529EDA"
+        android:text="Follow"
+        android:textAllCaps="false"
+        android:fontFamily="@font/poppins_semibold"
+        android:textColor="#000"
+        android:textSize="12sp" />
+
+</RelativeLayout>

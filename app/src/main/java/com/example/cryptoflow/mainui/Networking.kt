@@ -31,7 +31,7 @@ class Networking : AppCompatActivity() {
 
     private var imageUri: Uri? = null
     private var storagePostPictureRef: StorageReference? = null
-    private  var myUrl=""
+    private var myUrl = ""
 
     private val cropActivityResultContract = object : ActivityResultContract<Any?, Uri?>() {
         override fun createIntent(context: Context, input: Any?): Intent {
@@ -52,7 +52,6 @@ class Networking : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_networking)
         storagePostPictureRef = FirebaseStorage.getInstance().reference.child("Post Picture")
-        redirectPostThoughts()
         setImageOnStorage()
         hideThoughtLoader()
         cropActivityResultLauncher = registerForActivityResult(cropActivityResultContract) {
@@ -66,83 +65,103 @@ class Networking : AppCompatActivity() {
             cropActivityResultLauncher.launch(null)
         }
     }
+
     private fun hideThoughtLoader() {
         postThoughtLoader.visibility = View.GONE
     }
 
-
-
-    private fun redirectPostThoughts() {
-        backToHome.setOnClickListener {
-            val intent = Intent(this, ListActivity::class.java)
-            startActivity(intent)
-        }
-    }
-
     private fun setImageOnStorage() {
         shareButton.setOnClickListener {
-            when {
-                imageUri == null -> Toast.makeText(this, "Please select image first.", Toast.LENGTH_LONG).show()
-                TextUtils.isEmpty(textPost.text.toString()) -> Toast.makeText(this, "Please write caption", Toast.LENGTH_LONG).show()
+            if (imageUri == null) {
+                displayThoughtLoader()
+                Toast.makeText(this, "Uploading...", Toast.LENGTH_LONG).show()
 
-                else -> {
-                    displayThoughtLoader()
-                    Toast.makeText(this, "Uploading...", Toast.LENGTH_LONG).show()
-                    val fileRef = storagePostPictureRef!!.child(System.currentTimeMillis().toString() + ".jpg")
+                val ref = FirebaseDatabase.getInstance().reference.child("Posts")
+                val postid = ref.push().key
 
-                    var uploadTask: StorageTask<*>
-                    uploadTask = fileRef.putFile(imageUri!!)
+                val postMap = HashMap<String, Any>()
 
-                    uploadTask.continueWithTask(Continuation <UploadTask.TaskSnapshot, Task<Uri>> { task ->
-                        if (!task.isSuccessful) {
-                            task.exception?.let {
-                                throw it
+                postMap["postid"] = postid!!
+                postMap["caption"] = textPost.text.toString()
+                postMap["publisher"] = FirebaseAuth.getInstance().currentUser!!.uid
+//                postMap["postimage"] = null
+
+                ref.child(postid).updateChildren(postMap)
+
+                val commentRef =
+                    FirebaseDatabase.getInstance().reference.child("Comment").child(postid)
+                val commentMap = HashMap<String, Any>()
+                commentMap["publisher"] = FirebaseAuth.getInstance().currentUser!!.uid
+                commentMap["comment"] = textPost.text.toString()
+
+                commentRef.push().setValue(commentMap)
+
+                Toast.makeText(this, "Uploaded successfully", Toast.LENGTH_LONG).show()
+                val intent = Intent(this@Networking, ListActivity::class.java)
+                startActivity(intent)
+                finish()
+
+                hideThoughtLoader()
+            } else {
+                Toast.makeText(this, "Uploading...", Toast.LENGTH_LONG).show()
+                val fileRef =
+                    storagePostPictureRef!!.child(System.currentTimeMillis().toString() + ".jpg")
+
+                var uploadTask: StorageTask<*>
+                uploadTask = fileRef.putFile(imageUri!!)
+
+                uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                    if (!task.isSuccessful) {
+                        task.exception?.let {
+                            throw it
 //                                Toast.makeText(this, "Something Went wrong...", Toast.LENGTH_LONG).show()
-                            }
                         }
-                        return@Continuation fileRef.downloadUrl
-                    }).addOnCompleteListener(OnCompleteListener<Uri> { task ->
-                        if (task.isSuccessful) {
-                            val downloadUrl = task.result
-                            myUrl = downloadUrl.toString()
+                    }
+                    return@Continuation fileRef.downloadUrl
+                }).addOnCompleteListener(OnCompleteListener<Uri> { task ->
+                    if (task.isSuccessful) {
+                        val downloadUrl = task.result
+                        myUrl = downloadUrl.toString()
 
-                            val ref = FirebaseDatabase.getInstance().reference.child("Posts")
-                            val postid = ref.push().key
+                        val ref = FirebaseDatabase.getInstance().reference.child("Posts")
+                        val postid = ref.push().key
 
-                            val postMap = HashMap<String, Any>()
+                        val postMap = HashMap<String, Any>()
 
-                            postMap["postid"] = postid!!
-                            postMap["caption"] = textPost.text.toString()
-                            postMap["publisher"] = FirebaseAuth.getInstance().currentUser!!.uid
-                            postMap["postimage"] = myUrl
+                        postMap["postid"] = postid!!
+                        postMap["caption"] = textPost.text.toString()
+                        postMap["publisher"] = FirebaseAuth.getInstance().currentUser!!.uid
+                        postMap["postimage"] = myUrl
 
-                            ref.child(postid).updateChildren(postMap)
+                        ref.child(postid).updateChildren(postMap)
 
-                            val commentRef=FirebaseDatabase.getInstance().reference.child("Comment").child(postid)
-                            val commentMap = HashMap<String, Any>()
-                            commentMap["publisher"] = FirebaseAuth.getInstance().currentUser!!.uid
-                            commentMap["comment"] =  textPost.text.toString()
+                        val commentRef =
+                            FirebaseDatabase.getInstance().reference.child("Comment").child(postid)
+                        val commentMap = HashMap<String, Any>()
+                        commentMap["publisher"] = FirebaseAuth.getInstance().currentUser!!.uid
+                        commentMap["comment"] = textPost.text.toString()
 
-                            commentRef.push().setValue(commentMap)
+                        commentRef.push().setValue(commentMap)
 
-                            Toast.makeText(this, "Uploaded successfully", Toast.LENGTH_LONG).show()
-                            val intent = Intent(this@Networking, ListActivity::class.java)
-                            startActivity(intent)
-                            finish()
+                        Toast.makeText(this, "Uploaded successfully", Toast.LENGTH_LONG).show()
+                        val intent = Intent(this@Networking, ListActivity::class.java)
+                        startActivity(intent)
+                        finish()
 
-                            hideThoughtLoader()
-                        } else {
-                            hideThoughtLoader()
-                        }
-                    })
-                }
+                        hideThoughtLoader()
+                    }
+
+                })
+
             }
         }
+
+
     }
 
     private fun displayThoughtLoader() {
         postThoughtLoader.visibility = View.VISIBLE
     }
-
-
 }
+
+

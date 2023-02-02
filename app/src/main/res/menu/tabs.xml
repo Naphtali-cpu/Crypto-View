@@ -5,20 +5,25 @@
         android:icon="@drawable/newhome"
         android:title="Home" />
 
+<!--    <item-->
+<!--        android:id="@+id/nav_search"-->
+<!--        android:icon="@drawable/newusersearch"-->
+<!--        android:title="Search" />-->
+
     <item
         android:id="@+id/nav_network"
-        android:icon="@drawable/asset_icon"
+        android:icon="@drawable/newgraph"
         android:title="Posts" />
 
     <item
         android:id="@+id/nav_news"
-        android:icon="@drawable/news"
+        android:icon="@drawable/newfeed"
         android:title= "Feed" />
 
 
     <item
         android:id="@+id/nav_profile"
-        android:icon="@drawable/profile"
+        android:icon="@drawable/newuser"
         android:title="Profile" />
 
 </menu>

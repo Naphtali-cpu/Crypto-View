@@ -71,7 +71,8 @@ class ListActivity : AppCompatActivity() {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
-                    for (userSnapshot in snapshot.children){
+                    userArrayList.clear()
+                    for (userSnapshot in snapshot.children.reversed()){
                         val user = userSnapshot.getValue(Post::class.java)
                         userArrayList.add(user!!)
                     }
